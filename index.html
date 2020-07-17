@@ -89,8 +89,9 @@
 </head>
 <body>
 
-<div class="img-holder"></div>
+<div class="img-holder" style="display:none"></div>
 <strong>All Neon One Properties</strong>
+<div class="loading"><em>loading...</em></div>
 <div class="appender tree">
 
 </div>
@@ -292,6 +293,7 @@
     });
 
 
+    $('.loading').remove();
     //sort links alphabetically
     $('.children').each(function(){
       var $list = $(this);
@@ -426,6 +428,7 @@
   // });
 
   function populateUrlInfo($el) {
+    $('.img-holder').show();
     if($el.find('a').attr('href')) {
 
       var $img = $(document.createElement('div'));
