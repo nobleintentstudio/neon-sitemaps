@@ -35,18 +35,40 @@
     .img-holder {
       width: 500px;
       white-space: nowrap;
+      background: #ffffff;
+      z-index: 1;
+      padding: 5px;
+      border: 3px solid black;
+      overflow: scroll;
+      line-height: 1.5;
+    }
+    .img-holder p a {
+      padding-bottom: 5px;
     }
     .img-holder img {
       display: block;
       border: 3px solid #333;
       width: 100%;
+      /*margin: 10px 0;*/
+      border-left: 0;
+      border-right: 0;
+      width: calc(100% + 10px);
+      margin-left: -5px;
 
     }
+
     .sub_parent {
       display: none;
     }
     .toggle {
       cursor: pointer;
+    }
+    .root {
+      font-weight: bold;
+    }
+    .children {
+      padding-left: 2em;
+      display: none;
     }
     p {
       margin: 0;
@@ -66,973 +88,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js" integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="links">
-  <a class="sm__link">/15ntc-top-five-events-in-austin-this-year/</a>
-  <a class="sm__link">/15ntc-recap-on-another-great-conference/</a>
-  <a class="sm__link">/open-api-release/</a>
-  <a class="sm__link">/6-ways-nonprofit-can-promote-matching-gifts/</a>
-  <a class="sm__link">/givingtuesday-webinar-designing-a-donation-experience-for-stewardship/</a>
-  <a class="sm__link">/5-best-nonprofit-website-trends-of-2016/</a>
-  <a class="sm__link">/the-15-best-nonprofitpickuplines-tweets/</a>
-  <a class="sm__link">/a-givingtuesday-reality-check/</a>
-  <a class="sm__link">/getting-locked-room-taught-fundraising/</a>
-  <a class="sm__link">/the-future-of-nonprofit-email-trends-for-2016-to-2026/</a>
-  <a class="sm__link">/diy-fundraising/</a>
-  <a class="sm__link">/nonprofit-tech-carnival-managing-donor-data/</a>
-  <a class="sm__link">/donor-centered-stories-more-philanthropic-gifts/</a>
-  <a class="sm__link">/managing-your-donor-data-resources/</a>
-  <a class="sm__link">/encourage-volunteer-giving-on-social/</a>
-  <a class="sm__link">/know-your-peer-to-peer-fundraising-campaigns/</a>
-  <a class="sm__link">/why-fundraising-software-is-losing-you-money/</a>
-  <a class="sm__link">/8-easy-ways-to-delight-your-members/</a>
-  <a class="sm__link">/peer-to-peer-fundraising-4-essentials-for-your-next-event/</a>
-  <a class="sm__link">/silent-auctions/</a>
-  <a class="sm__link">/craft-beer-fundraising/</a>
-  <a class="sm__link">/nonprofit-data-visualization-and-infographics-the-definitive-guide/</a>
-  <a class="sm__link">/the-new-facebook-donate-button-is-just-a-link-to-your-website-and-thats-a-good-thing/</a>
-  <a class="sm__link">/annual-fund-key-to-donor-retention/</a>
-  <a class="sm__link">/10-ways-prospect-research-can-increase-donations/</a>
-  <a class="sm__link">/crm-users-guide-fundraising-effectiveness-part-3/</a>
-  <a class="sm__link">/4-mobile-apps-every-smart-fundraiser-should-be-using/</a>
-  <a class="sm__link">/annual-giving-strategies-5-ways-flip-the-script/</a>
-  <a class="sm__link">/make-the-most-of-your-year-end-appeal-with-data/</a>
-  <a class="sm__link">/keep-fundraising-events-fresh/</a>
-  <a class="sm__link">/3-donor-management-solutions-to-improve-donor-retention/</a>
-  <a class="sm__link">/tax-reform-charitable-deduction-what-you-can-do/</a>
-  <a class="sm__link">/silent-auction-clickbid/</a>
-  <a class="sm__link">/engage-supporters-social-media/</a>
-  <a class="sm__link">/nonprofit-1871-startup-tips/</a>
-  <a class="sm__link">/nonprofit-feasibility-study/</a>
-  <a class="sm__link">/spring-fundraising-ideas/</a>
-  <a class="sm__link">/best-practices-improving-online-accessibility/</a>
-  <a class="sm__link">/5-ways-to-make-this-givingtuesday-about-donor-retention/</a>
-  <a class="sm__link">/nonprofit-website-seo-optimizations/</a>
-  <a class="sm__link">/donation-process-optimization-checklist/</a>
-  <a class="sm__link">/neoncrm-afp-2017-press-release/</a>
-  <a class="sm__link">/nonprofit-branding-guide/</a>
-  <a class="sm__link">/matching-gifts/</a>
-  <a class="sm__link">/nonprofit-crowdfunding/</a>
-  <a class="sm__link">/social-justice-fundraising/</a>
-  <a class="sm__link">/5-elements-of-diverse-board/</a>
-  <a class="sm__link">/buying-donor-tracking-software/</a>
-  <a class="sm__link">/rethinking-spring-appeal/</a>
-  <a class="sm__link">/grow-membership-changing-environment/</a>
-  <a class="sm__link">/the-benefits-online-fundraising-compliance/</a>
-  <a class="sm__link">/creative-ideas-fundraising-event/</a>
-  <a class="sm__link">/what-do-donors-want-nonprofit-website/</a>
-  <a class="sm__link">/ceo-jeff-gordy-announces-neon-one-software-application-development-platform-network-partners/</a>
-  <a class="sm__link">/10-strategies-earn-keep-nonprofit-donor-trust/</a>
-  <a class="sm__link">/end-fiscal-year-tips-nonprofits/</a>
-  <a class="sm__link">/donor-prospect-research-101/</a>
-  <a class="sm__link">/conquering-data-redundancy/</a>
-  <a class="sm__link">/5-ways-benefit-mobile-fundraising/</a>
-  <a class="sm__link">/are-your-donation-forms-optimized/</a>
-  <a class="sm__link">/taking-small-steps-large-gifts/</a>
-  <a class="sm__link">/direct-mail-vs-email-nonprofits/</a>
-  <a class="sm__link">/giving-gift-cards/</a>
-  <a class="sm__link">/fundraising-software-top-questions/</a>
-  <a class="sm__link">/nonprofit-you-should-know-wyoming-equality/</a>
-  <a class="sm__link">/nonprofit-you-should-know-texas-catholic-conference-of-bishops/</a>
-  <a class="sm__link">/10-takeaways-giving-usa/</a>
-  <a class="sm__link">/gender-diversity-nonprofit/</a>
-  <a class="sm__link">/indian-river-charter-school/</a>
-  <a class="sm__link">/5-podcasts-nonprofit-professionals-need/</a>
-  <a class="sm__link">/3-ways-difficult-conversation/</a>
-  <a class="sm__link">/8-ways-reconnect-lapsed-donors/</a>
-  <a class="sm__link">/3-ways-refresh-community-engagement/</a>
-  <a class="sm__link">/nonprofit-email-marketing/</a>
-  <a class="sm__link">/inc-5000-2017/</a>
-  <a class="sm__link">/is-donor-data-enough/</a>
-  <a class="sm__link">/raise-money-arts-organization/</a>
-  <a class="sm__link">/nonprofit-spotlight-preservation-houston/</a>
-  <a class="sm__link">/nonprofit-you-should-know-challenge-aspen/</a>
-  <a class="sm__link">/adaptive-sports-fundraising-guide/</a>
-  <a class="sm__link">/credit-card-fraud-nonprofits/</a>
-  <a class="sm__link">/charitable-solicitation-compliance-webinar/</a>
-  <a class="sm__link">/recognizing-nonprofit-board-directors/</a>
-  <a class="sm__link">/nonprofit-spotlight-casa-of-cook-county/</a>
-  <a class="sm__link">/nonprofit-anniversary-marketing/</a>
-  <a class="sm__link">/leverage-online-communities-donations/</a>
-  <a class="sm__link">/beyond-givingtuesday/</a>
-  <a class="sm__link">/nonprofit-spotlight-hawaii-farmers-union-united/</a>
-  <a class="sm__link">/lesson-new-orleans-rebuilding-capacity/</a>
-  <a class="sm__link">/email-charter-tips/</a>
-  <a class="sm__link">/nonprofit-spotlight-canvasback-mission/</a>
-  <a class="sm__link">/nonprofit-fitness-organization-health/</a>
-  <a class="sm__link">/product-update-prospect-report/</a>
-  <a class="sm__link">/nonprofit-spotlight-impaired-preschool-services-vips/</a>
-  <a class="sm__link">/nonprofit-centers-capacity-building/</a>
-  <a class="sm__link">/learning-management-systems-nonprofits/</a>
-  <a class="sm__link">/beyond-fiscal-sponsorships/</a>
-  <a class="sm__link">/attendee-retention-tips-event/</a>
-  <a class="sm__link">/4-nonprofits-love/</a>
-  <a class="sm__link">/raisers-edge-nxt/</a>
-  <a class="sm__link">/capital-campaign-marketing-tips/</a>
-  <a class="sm__link">/giftworks-another-fundraising-software-company-sells-out/</a>
-  <a class="sm__link">/3-ways-ministries-overcome-fundraising-fear/</a>
-  <a class="sm__link">/charity-auction-tips/</a>
-  <a class="sm__link">/5-stellar-nonprofits-using-social-media/</a>
-  <a class="sm__link">/video-storytelling-driving-action-video/</a>
-  <a class="sm__link">/truth-nonprofit-data-migrations/</a>
-  <a class="sm__link">/managing-memorial-donations/</a>
-  <a class="sm__link">/nonprofit-automation-workflows-preview/</a>
-  <a class="sm__link">/nonprofit-excel-tips-cleaning-managing-data/</a>
-  <a class="sm__link">/nonprofit-accounting-reconciliation/</a>
-  <a class="sm__link">/major-gifts-basics/</a>
-  <a class="sm__link">/online-fundraising-auctions-expanding-your-bidding-pool/</a>
-  <a class="sm__link">/fundraising-database-cleanup-tips/</a>
-  <a class="sm__link">/neon-update-sneak-peek-dashboard-widgets/</a>
-  <a class="sm__link">/product-update-workflows/</a>
-  <a class="sm__link">/fund-tracking-for-nonprofit-organizations/</a>
-  <a class="sm__link">/nonprofit-email-subject-lines/</a>
-  <a class="sm__link">/everything-you-know-about-generational-giving-is-wrong/</a>
-  <a class="sm__link">/zapier-streamline-nonprofits-operations/</a>
-  <a class="sm__link">/smart-donor-segmentation-strategies/</a>
-  <a class="sm__link">/neoncrm-named-to-inc-5000s-list-of-fastest-growing-companies-four-years-in-a-row/</a>
-  <a class="sm__link">/how-to-build-a-strong-fund-development-committee/</a>
-  <a class="sm__link">/introducing-neon-one/</a>
-  <a class="sm__link">/four-fundraising-tips-for-every-nonprofit-campaign/</a>
-  <a class="sm__link">/enhance-a-donors-personal-journey-with-video/</a>
-  <a class="sm__link">/introducing-neoncrms-cra-receipts/</a>
-  <a class="sm__link">/last-minute-fall-gala-prep/</a>
-  <a class="sm__link">/10-favorite-zapier-app-integrations/</a>
-  <a class="sm__link">/generational-giving-myths/</a>
-  <a class="sm__link">/nutrition-at-your-non-profit/</a>
-  <a class="sm__link">/top-five-email-marketing-mistakes/</a>
-  <a class="sm__link">/volunteer-management-solutions/</a>
-  <a class="sm__link">/rock-givingtuesday-crm/</a>
-  <a class="sm__link">/nonprofit-crm-data-conversion-scary/</a>
-  <a class="sm__link">/using-data-peer-to-peer-fundraising-campaign/</a>
-  <a class="sm__link">/nonprofit-you-should-know-midtown-educational-foundation/</a>
-  <a class="sm__link">/mental-health-nonprofit-workplace/</a>
-  <a class="sm__link">/nonprofit-crm-software-customization-future/</a>
-  <a class="sm__link">/consultation-training-current-clients/</a>
-  <a class="sm__link">/workflows-supercharging-donor-cultivation-with-automation/</a>
-  <a class="sm__link">/giving-tree-fundraising/</a>
-  <a class="sm__link">/pride-month-neon/</a>
-  <a class="sm__link">/neoncrm-ceo-how-to-make-the-world-a-better-place-and-succeed/</a>
-  <a class="sm__link">/establishing-data-driven-culture-your-nonprofit/</a>
-  <a class="sm__link">/fundraising-analytic-clinic-pains-profit/</a>
-  <a class="sm__link">/nonprofit-you-should-know-oca-asian-pacific-american-advocates/</a>
-  <a class="sm__link">/text-messaging-fundraising-events/</a>
-  <a class="sm__link">/complying-with-gdpr-data-consent-regulations-for-nonprofit-organizations/</a>
-  <a class="sm__link">/product-update-constant-contact-integration/</a>
-  <a class="sm__link">/simplifying-modernizing-monetizing-fundraising-events/</a>
-  <a class="sm__link">/nonprofit-you-should-know-national-association-of-judiciary-interpreters-and-translators/</a>
-  <a class="sm__link">/how-to-win-grassroots-policy-campaign-online/</a>
-  <a class="sm__link">/strategic-planning-through-an-anti-racism-lens/</a>
-  <a class="sm__link">/equity-diversity-inclusion-your-nonprofit/</a>
-  <a class="sm__link">/international-womens-day-5-trailblazing-women-tech-know/</a>
-  <a class="sm__link">/identifying-major-gift-donors-data/</a>
-  <a class="sm__link">/nonprofit-know-chicago-district-golf-association-foundation/</a>
-  <a class="sm__link">/product-update-advanced-email-scheduling/</a>
-  <a class="sm__link">/fundraising-jeff-bezos/</a>
-  <a class="sm__link">/nonprofit-know-michigan-farmers-market-association/</a>
-  <a class="sm__link">/ask-major-gift-practice-prepare/</a>
-  <a class="sm__link">/donor-retention-need-know-care/</a>
-  <a class="sm__link">/nonprofit-know-rmc-foundation/</a>
-  <a class="sm__link">/takeaways-first-capacity-camp/</a>
-  <a class="sm__link">/experience-learned-interning-neon-summer/</a>
-  <a class="sm__link">/5-text-give-challenges-how-to-solve/</a>
-  <a class="sm__link">/innovating-build-capacity/</a>
-  <a class="sm__link">/7-building-block-questions-ask/</a>
-  <a class="sm__link">/its-not-about-diversity-its-about-justice/</a>
-  <a class="sm__link">/four-tips-planning-peer-peer-fundraising-campaign/</a>
-  <a class="sm__link">/switching-database-from-excel-to-neon/</a>
-  <a class="sm__link">/abila-yourmembership-software-acquisition/</a>
-  <a class="sm__link">/site-visits-good-bad-ugly/</a>
-  <a class="sm__link">/crm-not-connected-online-community-youre-losing-members/</a>
-  <a class="sm__link">/art-of-peer-to-peer-fundraising/</a>
-  <a class="sm__link">/10-steps-for-a-successful-website-project/</a>
-  <a class="sm__link">/win-donors-writing-heart/</a>
-  <a class="sm__link">/running-annual-fund-marathon/</a>
-  <a class="sm__link">/embracing-diversity-at-your-nonprofit/</a>
-  <a class="sm__link">/nonprofit-consultants-introducing-neon-consulting-network/</a>
-  <a class="sm__link">/membership-consultants-association-experts-thought-leaders/</a>
-  <a class="sm__link">/introducing-neon-one-nonprofit-network-help-grow/</a>
-  <a class="sm__link">/10-nptech-statistics/</a>
-  <a class="sm__link">/membership-engagement-mistakes/</a>
-  <a class="sm__link">/membership-application-form/</a>
-  <a class="sm__link">/phone-support-doesnt-work-heres-fixed/</a>
-  <a class="sm__link">/hire-professional-fundraising-consultant-5-expert-tips/</a>
-  <a class="sm__link">/crm-users-guide-fundraising-effectiveness-part-2/</a>
-  <a class="sm__link">/crm-users-guide-fundraising-effectiveness-part-1/</a>
-  <a class="sm__link">/givingtuesday-2016-numbers/</a>
-  <a class="sm__link">/re-engaging-past-donors-holidays/</a>
-  <a class="sm__link">/diy-fundraising-audit/</a>
-  <a class="sm__link">/4-signs-nonprofit-needs-new-website/</a>
-  <a class="sm__link">/honored-one-nations-fastest-growing-companies/</a>
-  <a class="sm__link">/6-biggest-mistakes-nonprofit-websites-make/</a>
-  <a class="sm__link">/meet-2015-neon-web-studio-grant-recipient/</a>
-  <a class="sm__link">/the-future-of-nonprofit-fundraising/</a>
-  <a class="sm__link">/were-honored-to-be-one-of-the-nations-fastest-growing-companies/</a>
-  <a class="sm__link">/neoncrm-has-partnered-with-eventbrite/</a>
-  <a class="sm__link">/why-your-nonprofit-needs-prospect-research/</a>
-  <a class="sm__link">/beyond-the-pie-fundraising-data-its-more-than-pretty-charts/</a>
-  <a class="sm__link">/donor-stewardship-planting-the-seeds-for-retention/</a>
-  <a class="sm__link">/planning-for-givingtuesday/</a>
-  <a class="sm__link">/the-importance-of-millennials-as-donors-and-volunteers/</a>
-  <a class="sm__link">/nonprofit-crm-clean-up-the-cure-for-the-summertime-blues/</a>
-  <a class="sm__link">/what-mad-men-can-teach-nonprofits-about-their-crm/</a>
-  <a class="sm__link">/a-few-ways-to-avoid-donor-fatigue/</a>
-  <a class="sm__link">/donor-and-member-retention-turn-your-one-time-fans-into-season-ticket-holders/</a>
-  <a class="sm__link">/pledges-investing-in-your-success/</a>
-  <a class="sm__link">/rolling-out-the-red-carpet-for-major-donors/</a>
-  <a class="sm__link">/spotlight-share-pregnancy-infant-loss-support/</a>
-  <a class="sm__link">/end-of-the-year-appeals-explained/</a>
-  <a class="sm__link">/great-stewardship-from-day-one-of-your-annual-fund/</a>
-  <a class="sm__link">/blackbaud-customers-encouraged-to-consider-alternatives-during-common-ground-retirement/</a>
-  <a class="sm__link">/what-i-learned-at-money-for-our-movements/</a>
-  <a class="sm__link">/move-over-blackbaud-osaurus-make-room-for-the-new-cloud-in-town/</a>
-  <a class="sm__link">/how-the-neon-crm-helped-turn-my-birthday-into-a-4800-fundraiser/</a>
-  <a class="sm__link">/managing-stress-during-the-busiest-time-of-the-year/</a>
-  <a class="sm__link">/5-ways-workflows-can-automate-your-year-end-fundraising-campaign/</a>
-  <a class="sm__link">/saving-time-with-workflows/</a>
-  <a class="sm__link">/giving-tuesday-at-wyoming-equality/</a>
-  <a class="sm__link">/giving-tuesday-at-lawrence-humane/</a>
-  <a class="sm__link">/how-neon-nonprofits-do-giving-tuesday-giving-back/</a>
-  <a class="sm__link">/run-seo-friendly-charity-website/</a>
-  <a class="sm__link">/nonprofit-workplace-culture/</a>
-  <a class="sm__link">/nonprofit-crm-can-save-10-hours-every-week/</a>
-  <a class="sm__link">/campaign-action-plan-in-4-steps/</a>
-  <a class="sm__link">/matching-gifts-fundraising-goldmine/</a>
-  <a class="sm__link">/nonprofit-know-lawrence-humane-society/</a>
-  <a class="sm__link">/veterans-day-nonprofits/</a>
-  <a class="sm__link">/neon-welcomes-civicore/</a>
-  <a class="sm__link">/mlk-jr-day-of-service/</a>
-  <a class="sm__link">/why-data-stewardship-matters/</a>
-  <a class="sm__link">/data-stewardship-webinar-recap/</a>
-  <a class="sm__link">/valentines-day-donor-retention/</a>
-  <a class="sm__link">/revenue-boost-matching-gifts/</a>
-  <a class="sm__link">/2019-nonprofit-leadership-study-findings/</a>
-  <a class="sm__link">/donor-personas/</a>
-  <a class="sm__link">/introducing-neon-one-academy-elite-1/</a>
-  <a class="sm__link">/product-update-ux-redesign/</a>
-  <a class="sm__link">/nonprofit-year-end-checklist-3-things-every-organization-should-do/</a>
-  <a class="sm__link">/moving-in-to-your-new-nonprofit-crm/</a>
-  <a class="sm__link">/nonprofit-know-hardy-girls-healthy-women/</a>
-  <a class="sm__link">/respectful-volunteers-time-retain/</a>
-  <a class="sm__link">/ensure-nonprofit-compliance/</a>
-  <a class="sm__link">/open-letter-board-member-salesforce/</a>
-  <a class="sm__link">/neon-welcomes-arts-people/</a>
-  <a class="sm__link">/product-update-account-page/</a>
-  <a class="sm__link">/neonmoves-powered-by-artificial-intelligence/</a>
-  <a class="sm__link">/finding-balance-nonprofit-event-planning/</a>
-  <a class="sm__link">/nonprofit-chart-of-accounts/</a>
-  <a class="sm__link">/moves-management-program/</a>
-  <a class="sm__link">/nonprofit-websites-making-your-investment-count/</a>
-  <a class="sm__link">/reflecting-on-your-annual-fund/</a>
-  <a class="sm__link">/neon-one-iwave-integration/</a>
-  <a class="sm__link">/lessons-in-donation-page-optimization/</a>
-  <a class="sm__link">/identifying-new-donors/</a>
-  <a class="sm__link">/fundraising-consultant/</a>
-  <a class="sm__link">/4-ways-to-manage-donor-data/</a>
-  <a class="sm__link">/the-neon-one-academy-elite-2/</a>
-  <a class="sm__link">/volunteer-grants/</a>
-  <a class="sm__link">/cuseum-integration/</a>
-  <a class="sm__link">/nonprofit-board-training/</a>
-  <a class="sm__link">/nonprofit-capacity-building/</a>
-  <a class="sm__link">/membership-engagement-strategies/</a>
-  <a class="sm__link">/how-to-increase-membership/</a>
-  <a class="sm__link">/list-page-redesign/</a>
-  <a class="sm__link">/peer-to-peer-fundraising-tips/</a>
-  <a class="sm__link">/grassroots-fundraising-advocacy-tips/</a>
-  <a class="sm__link">/major-gifts-program/</a>
-  <a class="sm__link">/crowdfunding-vs-peer-to-peer/</a>
-  <a class="sm__link">/nonprofit-call-to-action-button/</a>
-  <a class="sm__link">/text-to-give-challenges/</a>
-  <a class="sm__link">/top-charity-websites/</a>
-  <a class="sm__link">/3-wonderful-womens-advocacy-website/</a>
-  <a class="sm__link">/nonprofit-finance-primer-accounting/</a>
-  <a class="sm__link">/nonprofit-know-concord-art/</a>
-  <a class="sm__link">/cause-marketing/</a>
-  <a class="sm__link">/boodleai-integration/</a>
-  <a class="sm__link">/cra-guidelines-for-charities/</a>
-  <a class="sm__link">/capital-campaigns-for-nonprofits/</a>
-  <a class="sm__link">/donor-communications/</a>
-  <a class="sm__link">/giving-tuesday-statistics/</a>
-  <a class="sm__link">/volunteer-management-system/</a>
-  <a class="sm__link">/giving-tuesday-emails/</a>
-  <a class="sm__link">/npsocialsummit-recap-part-one/</a>
-  <a class="sm__link">/donor-fraud-ways-to-get-around-harsh-reality/</a>
-  <a class="sm__link">/donor-survey-questions/</a>
-  <a class="sm__link">/member-renewal-letters/</a>
-  <a class="sm__link">/annual-fund-101-getting-started/</a>
-  <a class="sm__link">/npsocialsummit-recap-part-two/</a>
-  <a class="sm__link">/giving-tuesday-webinar-recap/</a>
-  <a class="sm__link">/donor-covered-fees/</a>
-  <a class="sm__link">/giving-tuesday-canada/</a>
-  <a class="sm__link">/crossing-the-finish-line-end-of-the-year-wrap-up-tips/</a>
-  <a class="sm__link">/10-year-end-giving-statistics-every-fundraiser-should-know/</a>
-  <a class="sm__link">/how-many-year-end-emails-should-i-send/</a>
-  <a class="sm__link">/planning-your-best-year-end-fundraiser/</a>
-  <a class="sm__link">/create-donor-centric-appeals/</a>
-  <a class="sm__link">/our-top-five-favorite-metrics/</a>
-  <a class="sm__link">/perfect-ask-annual-fund/</a>
-  <a class="sm__link">/annual-giving-webinar-recap/</a>
-  <a class="sm__link">/6-new-years-resolutions-for-nonprofits/</a>
-  <a class="sm__link">/chicago-jewish-day-school/</a>
-  <a class="sm__link">/volunteer-retention-strategies/</a>
-  <a class="sm__link">/how-does-giving-tuesday-work/</a>
-  <a class="sm__link">/moves-management/</a>
-  <a class="sm__link">/</a>
-  <a class="sm__link">/blog/</a>
-  <a class="sm__link">/contact/</a>
-  <a class="sm__link">/neoncrm/</a>
-  <a class="sm__link">/neoncrm-test/</a>
-  <a class="sm__link">/section-test/</a>
-  <a class="sm__link">/support/</a>
-  <a class="sm__link">/integrations/mailchimp/</a>
-  <a class="sm__link">/integrations/wordpress/</a>
-  <a class="sm__link">/integrations/eventbrite/</a>
-  <a class="sm__link">/integrations/drupal/</a>
-  <a class="sm__link">/integrations/google-maps/</a>
-  <a class="sm__link">/integrations/higher-logic/</a>
-  <a class="sm__link">/integrations/double-the-donation/</a>
-  <a class="sm__link">/integrations/one-click-politics/</a>
-  <a class="sm__link">/integrations/donorpath/</a>
-  <a class="sm__link">/integrations/wealthengine/</a>
-  <a class="sm__link">/integrations/donorsearch/</a>
-  <a class="sm__link">/neon-partners/</a>
-  <a class="sm__link">/integrations/quickbooks/</a>
-  <a class="sm__link">/external-consultants/</a>
-  <a class="sm__link">/family-focus-case-study/</a>
-  <a class="sm__link">/websites/portfolio-broadcasters-foundation/</a>
-  <a class="sm__link">/websites/portfolio-blues-foundation/</a>
-  <a class="sm__link">/8866-2/</a>
-  <a class="sm__link">/reports-analytics/</a>
-  <a class="sm__link">/membership-forms/</a>
-  <a class="sm__link">/member-directory-software/</a>
-  <a class="sm__link">/nonprofit-event-registration-software/</a>
-  <a class="sm__link">/event-communications/</a>
-  <a class="sm__link">/nonprofit-activity-reminders/</a>
-  <a class="sm__link">/nonprofit-crm-opt-test/</a>
-  <a class="sm__link">/menu-test-page/</a>
-  <a class="sm__link">/school-fundraising-opt-test/</a>
-  <a class="sm__link">/home-page-performance-testing/</a>
-  <a class="sm__link">/nonprofit-crm-software/</a>
-  <a class="sm__link">/raising-more-from-major-gifts/</a>
-  <a class="sm__link">/nonprofit-payment-processing/</a>
-  <a class="sm__link">/nonprofit-fundraising-strategies/</a>
-  <a class="sm__link">/terms-of-service-payments/</a>
-  <a class="sm__link">/quiz-test-page/</a>
-  <a class="sm__link">/test/</a>
-  <a class="sm__link">/quizzer-test-page/</a>
-  <a class="sm__link">/fiscal-new-year-ar/</a>
-  <a class="sm__link">/top-nonprofit-website-builders/</a>
-  <a class="sm__link">/fundraising-event-planning/</a>
-  <a class="sm__link">/nonprofit-website-templates/</a>
-  <a class="sm__link">/terms-of-service/</a>
-  <a class="sm__link">/grant-management/</a>
-  <a class="sm__link">/import-export-data/</a>
-  <a class="sm__link">/document-storage-management/</a>
-  <a class="sm__link">/custom-survey-builder/</a>
-  <a class="sm__link">/fund-campaign-tracking/</a>
-  <a class="sm__link">/letter-material-tracking/</a>
-  <a class="sm__link">/online-store/</a>
-  <a class="sm__link">/terms-of-service-inspire/</a>
-  <a class="sm__link">/website-design-agreement/</a>
-  <a class="sm__link">/security-privacy/</a>
-  <a class="sm__link">/thank-you/</a>
-  <a class="sm__link">/neon-cares/</a>
-  <a class="sm__link">/terms-of-service-07272016/</a>
-  <a class="sm__link">/gdpr-compliance-nonprofits/</a>
-  <a class="sm__link">/on-boarding-faq/</a>
-  <a class="sm__link">/neon-one-nonprofit-applications/</a>
-  <a class="sm__link">/neon-one-nonprofit-consultants/</a>
-  <a class="sm__link">/websites/portfolio-our-house/</a>
-  <a class="sm__link">/websites/portfolio-lakewood-service-league/</a>
-  <a class="sm__link">/websites/portfolio-women-toys/</a>
-  <a class="sm__link">/guest-blogging-overview/</a>
-  <a class="sm__link">/about/</a>
-  <a class="sm__link">/referral-program/</a>
-  <a class="sm__link">/careers/</a>
-  <a class="sm__link">/nonprofit-websites/inspire/</a>
-  <a class="sm__link">/donor-management-software/</a>
-  <a class="sm__link">/social-fundraising/</a>
-  <a class="sm__link">/nonprofit-software-2/</a>
-  <a class="sm__link">/quickbooks-integration-nonprofit-software/</a>
-  <a class="sm__link">/missions/</a>
-  <a class="sm__link">/neon-one-nonprofit-network/</a>
-  <a class="sm__link">/neon-one-dev/</a>
-  <a class="sm__link">/nonprofit-websites/</a>
-  <a class="sm__link">/fundraising-marketing-resources/</a>
-  <a class="sm__link">/nonprofit-web-design-tips/</a>
-  <a class="sm__link">/membership-programs/</a>
-  <a class="sm__link">/aw-donor-management/</a>
-  <a class="sm__link">/aw-fundraising/</a>
-  <a class="sm__link">/adwords-membership/</a>
-  <a class="sm__link">/aw-nonprofit-websites/</a>
-  <a class="sm__link">/c-association-management-trial/</a>
-  <a class="sm__link">/c-association-management/</a>
-  <a class="sm__link">/c-donation-management/</a>
-  <a class="sm__link">/c-donation-management-trial/</a>
-  <a class="sm__link">/c-fundraising/</a>
-  <a class="sm__link">/c-fundraising-trial/</a>
-  <a class="sm__link">/c-membership-management/</a>
-  <a class="sm__link">/c-membership-management-trial/</a>
-  <a class="sm__link">/c-nonprofit-software/</a>
-  <a class="sm__link">/c-nonprofit-software-trial/</a>
-  <a class="sm__link">/year-end-fundraising-ultimate-guide/</a>
-  <a class="sm__link">/events-listing/</a>
-  <a class="sm__link">/nonprofit-event-management-software/</a>
-  <a class="sm__link">/nonprofit-reporting-analytics/</a>
-  <a class="sm__link">/thawte-site-seal/</a>
-  <a class="sm__link">/member-login-portal/</a>
-  <a class="sm__link">/major-gifts-fundraisers-guide/</a>
-  <a class="sm__link">/online-donation-software/</a>
-  <a class="sm__link">/event-management-software/</a>
-  <a class="sm__link">/fundraising-software/</a>
-  <a class="sm__link">/membership-software/</a>
-  <a class="sm__link">/alternative/</a>
-  <a class="sm__link">/nonprofit-web-design-firms/</a>
-  <a class="sm__link">/nonprofit-websites/neon-web-studio/</a>
-  <a class="sm__link">/websites/portfolio-one-project/</a>
-  <a class="sm__link">/neon-one-process/</a>
-  <a class="sm__link">/nonprofit-donation-forms/</a>
-  <a class="sm__link">/nonprofit-event-ticketing-software/</a>
-  <a class="sm__link">/membership-management-software-2/</a>
-  <a class="sm__link">/volunteer-management-software/</a>
-  <a class="sm__link">/online-forms/</a>
-  <a class="sm__link">/privacy/</a>
-  <a class="sm__link">/upcoming-webinars/</a>
-  <a class="sm__link">/nonprofit-software/</a>
-  <a class="sm__link">/nonprofit-software-3/</a>
-  <a class="sm__link">/dashboards/</a>
-  <a class="sm__link">/home-2-2-2/</a>
-  <a class="sm__link">/group-demo/</a>
-  <a class="sm__link">/groupdemoregistration-sa/</a>
-  <a class="sm__link">/launch/</a>
-  <a class="sm__link">/afp-2/</a>
-  <a class="sm__link">/chicago/</a>
-  <a class="sm__link">/solutions-international-humanitarian-orgs/</a>
-  <a class="sm__link">/solutions-medical-wellness-organizations/</a>
-  <a class="sm__link">/solutions-faith-organizations/</a>
-  <a class="sm__link">/solutions-environmental-organizations/</a>
-  <a class="sm__link">/solutions-professional-associations-membership/</a>
-  <a class="sm__link">/solutions-education/</a>
-  <a class="sm__link">/solutions-foundations/</a>
-  <a class="sm__link">/solutions-social-justice-activism-organizations/</a>
-  <a class="sm__link">/solutions-animal-wildlife/</a>
-  <a class="sm__link">/solutions-youth-organizations/</a>
-  <a class="sm__link">/neoncrm-features/</a>
-  <a class="sm__link">/solutions-human-services-organizations/</a>
-  <a class="sm__link">/solutions-arts-culture-orgs/</a>
-  <a class="sm__link">/websites/</a>
-  <a class="sm__link">/custom-objects/</a>
-  <a class="sm__link">/donation-receipt/</a>
-  <a class="sm__link">/peer-to-peer-fundraising-software/</a>
-  <a class="sm__link">/payment-processing/</a>
-  <a class="sm__link">/worksheet/</a>
-  <a class="sm__link">/neoncrm-recorded-demo/</a>
-  <a class="sm__link">/neon-for-you/</a>
-  <a class="sm__link">/neon-for-events/</a>
-  <a class="sm__link">/neon-for-fundraising/</a>
-  <a class="sm__link">/neon-for-membership/</a>
-  <a class="sm__link">/mobile-fundraising-app/</a>
-  <a class="sm__link">/chicago-2/</a>
-  <a class="sm__link">/neon-one/</a>
-  <a class="sm__link">/nonprofit-marketing-communications-software/</a>
-  <a class="sm__link">/alternative/etapestry/</a>
-  <a class="sm__link">/alternative/raisers-edge/</a>
-  <a class="sm__link">/alternative/giftworks/</a>
-  <a class="sm__link">/alternative/donorperfect/</a>
-  <a class="sm__link">/alternative/salesforce/</a>
-  <a class="sm__link">/alternative/kindful/</a>
-  <a class="sm__link">/alternative/salsa/</a>
-  <a class="sm__link">/alternative/network-for-good/</a>
-  <a class="sm__link">/alternative/abila/</a>
-  <a class="sm__link">/alternative/civicrm/</a>
-  <a class="sm__link">/alternative/everyaction/</a>
-  <a class="sm__link">/alternative/wild-apricot/</a>
-  <a class="sm__link">/membership-management-software/</a>
-  <a class="sm__link">/alternative/bloomerang/</a>
-  <a class="sm__link">/neon-features/</a>
-  <a class="sm__link">/neon-features/features-fundraising-donor-management/</a>
-  <a class="sm__link">/neon-features/web-integration/</a>
-  <a class="sm__link">/neon-features/volunteer/</a>
-  <a class="sm__link">/neon-features/social-fundraising/</a>
-  <a class="sm__link">/neon-features/reports/</a>
-  <a class="sm__link">/neon-features/quickbooks/</a>
-  <a class="sm__link">/neon-features/mobile-app/</a>
-  <a class="sm__link">/neon-features/membership/</a>
-  <a class="sm__link">/neon-features/fundraising/</a>
-  <a class="sm__link">/neon-features/events/</a>
-  <a class="sm__link">/neon-features/e-commerce/</a>
-  <a class="sm__link">/neon-features/communications/</a>
-  <a class="sm__link">/neon-features/api-customization/</a>
-  <a class="sm__link">/integrations/</a>
-  <a class="sm__link">/nonprofit-donor-database/</a>
-  <a class="sm__link">/pricing-empower/</a>
-  <a class="sm__link">/pricing-impact/</a>
-  <a class="sm__link">/pricing-essentials/</a>
-  <a class="sm__link">/learn/</a>
-  <a class="sm__link">/careers-2/</a>
-  <a class="sm__link">/annual-giving-definitive-guide/</a>
-  <a class="sm__link">/pro-services/</a>
-  <a class="sm__link">/sample-test-page/</a>
-  <a class="sm__link">/annual-fund-resources/</a>
-  <a class="sm__link">/ccpa-compliance-nonprofits/</a>
-  <a class="sm__link">/pricing/</a>
-  <a class="sm__link">/demo/</a>
-  <a class="sm__link">/workflows/</a>
-  <a class="sm__link">/giving-tuesday-resources/</a>
-  <a class="sm__link">/animated-columns/ticket-based-support-empower/</a>
-  <a class="sm__link">/animated-columns/ticket-based-support/</a>
-  <a class="sm__link">/animated-columns/nonprofit-web-design/</a>
-  <a class="sm__link">/animated-columns/build-online-donation-forms/</a>
-  <a class="sm__link">/animated-columns/save-time-grow-mission/</a>
-  <a class="sm__link">/animated-columns/track-donor-data/</a>
-  <a class="sm__link">/animated-columns/inspire-series/</a>
-  <a class="sm__link">/animated-columns/custom-websites/</a>
-  <a class="sm__link">/animated-columns/online-fundraising/</a>
-  <a class="sm__link">/animated-columns/donor-management/</a>
-  <a class="sm__link">/animated-columns/automated-correspondence/</a>
-  <a class="sm__link">/animated-columns/arts-culture-humanities-organizations/</a>
-  <a class="sm__link">/animated-columns/animal-wildlife-organizations/</a>
-  <a class="sm__link">/animated-columns/human-services/</a>
-  <a class="sm__link">/animated-columns/youth-organizations/</a>
-  <a class="sm__link">/animated-columns/social-justice-activism/</a>
-  <a class="sm__link">/animated-columns/foundations/</a>
-  <a class="sm__link">/animated-columns/education/</a>
-  <a class="sm__link">/animated-columns/professional-associations/</a>
-  <a class="sm__link">/animated-columns/environmental/</a>
-  <a class="sm__link">/animated-columns/faith/</a>
-  <a class="sm__link">/animated-columns/medical-wellness/</a>
-  <a class="sm__link">/animated-columns/humanitarian/</a>
-  <a class="sm__link">/animated-columns/support-packages/</a>
-  <a class="sm__link">/animated-columns/knowledge-base/</a>
-  <a class="sm__link">/animated-columns/training-videos/</a>
-  <a class="sm__link">/animated-columns/webinars/</a>
-  <a class="sm__link">/animated-columns/live-chat-empower/</a>
-  <a class="sm__link">/animated-columns/live-chat/</a>
-  <a class="sm__link">/animated-columns/phone-support-empower/</a>
-  <a class="sm__link">/animated-columns/phone-support/</a>
-  <a class="sm__link">/edge/neon-nonprofit-crm/</a>
-  <a class="sm__link">/edge/mobile-app-promo/</a>
-  <a class="sm__link">/edge/q2-promo/</a>
-  <a class="sm__link">/edge/12750/</a>
-  <a class="sm__link">/edge/web-studio-slider/</a>
-  <a class="sm__link">/edge/preservation-houston-slide-2/</a>
-  <a class="sm__link">/edge/preservation-houston-slide-4/</a>
-  <a class="sm__link">/edge/preservation-houston-slide-1/</a>
-  <a class="sm__link">/edge/preservation-houston-slide-3/</a>
-  <a class="sm__link">/edge/challenge-aspen-slide-2/</a>
-  <a class="sm__link">/edge/challenge-aspen-slide-3/</a>
-  <a class="sm__link">/edge/challenge-aspen-slide-1/</a>
-  <a class="sm__link">/edge/lawrence-humane-society-slide-2/</a>
-  <a class="sm__link">/edge/lawrence-humane-society-slide-4/</a>
-  <a class="sm__link">/edge/lawrence-humane-society-slide-3/</a>
-  <a class="sm__link">/edge/lawrence-humane-society-slide-1/</a>
-  <a class="sm__link">/edge/challenge-slide-3/</a>
-  <a class="sm__link">/edge/wyoming-equality-1/</a>
-  <a class="sm__link">/edge/wyoming-equality-3/</a>
-  <a class="sm__link">/edge/wyoming-equality-2/</a>
-  <a class="sm__link">/edge/15396/</a>
-  <a class="sm__link">/edge/wyoming-equality-5/</a>
-  <a class="sm__link">/edge/challenge-slide-1/</a>
-  <a class="sm__link">/edge/family-focus-slide/</a>
-  <a class="sm__link">/edge/big-brothers-big-sisters/</a>
-  <a class="sm__link">/team/</a>
-  <a class="sm__link">/team/ellen-bristol/</a>
-  <a class="sm__link">/team/marc-a-pitman/</a>
-  <a class="sm__link">/team/heidi-massey/</a>
-  <a class="sm__link">/team/jw-wiley/</a>
-  <a class="sm__link">/team/louise-kelly/</a>
-  <a class="sm__link">/team/john-oppenheim/</a>
-  <a class="sm__link">/team/laurin-mayeno/</a>
-  <a class="sm__link">/team/nikki-mccord/</a>
-  <a class="sm__link">/team/desiree-adaway/</a>
-  <a class="sm__link">/team/denise-barreto/</a>
-  <a class="sm__link">/team/kimberley-rudd/</a>
-  <a class="sm__link">/team/parissa-behnia/</a>
-  <a class="sm__link">/team/lisa-lane/</a>
-  <a class="sm__link">/team/rubin-singh/</a>
-  <a class="sm__link">/team/shuling-yong/</a>
-  <a class="sm__link">/team/back-office-thinking/</a>
-  <a class="sm__link">/team/cathexis-partners/</a>
-  <a class="sm__link">/team/charity-dynamics/</a>
-  <a class="sm__link">/team/social-driver/</a>
-  <a class="sm__link">/team/five-paths/</a>
-  <a class="sm__link">/team/pamela-grow/</a>
-  <a class="sm__link">/team/bear-design-company/</a>
-  <a class="sm__link">/team/patrick-florville/</a>
-  <a class="sm__link">/team/harbor-compliance/</a>
-  <a class="sm__link">/team/aidan-juhl/</a>
-  <a class="sm__link">/team/calie-lyons/</a>
-  <a class="sm__link">/team/jose-martinez/</a>
-  <a class="sm__link">/team/sula-hitzeman/</a>
-  <a class="sm__link">/team/nina-deremer/</a>
-  <a class="sm__link">/team/nikki-diehl/</a>
-  <a class="sm__link">/team/kristina-jakstas/</a>
-  <a class="sm__link">/team/josh-kesler/</a>
-  <a class="sm__link">/team/jeff-gordy/</a>
-  <a class="sm__link">/team/emily-keaney/</a>
-  <a class="sm__link">/team/edward-shen/</a>
-  <a class="sm__link">/team/casey-wittekind/</a>
-  <a class="sm__link">/team/brendan-noone/</a>
-  <a class="sm__link">/team/alina-georgacopoulos/</a>
-  <a class="sm__link">/team/russel-katz/</a>
-  <a class="sm__link">/team/mary-demar/</a>
-  <a class="sm__link">/team/andres-de-sousa/</a>
-  <a class="sm__link">/team/katie-wohl/</a>
-  <a class="sm__link">/team/sean-dotson/</a>
-  <a class="sm__link">/team/joshua-johnson/</a>
-  <a class="sm__link">/team/eryn-macneil/</a>
-  <a class="sm__link">/team/gabriella-snow/</a>
-  <a class="sm__link">/team/scott-woodfill/</a>
-  <a class="sm__link">/team/michael-evert/</a>
-  <a class="sm__link">/team/joshua-yates/</a>
-  <a class="sm__link">/team/zach-korotko/</a>
-  <a class="sm__link">/team/ellen-puglisi/</a>
-  <a class="sm__link">/team/adam-stevenson/</a>
-  <a class="sm__link">/team/kurt-stevens/</a>
-  <a class="sm__link">/team/olivia-ayers/</a>
-  <a class="sm__link">/team/vera-bojic/</a>
-  <a class="sm__link">/team/julie-mueller/</a>
-  <a class="sm__link">/team/aaron-hawkins/</a>
-  <a class="sm__link">/team/allie-vincent/</a>
-  <a class="sm__link">/team/humanworkplaces/</a>
-  <a class="sm__link">/team/chris-tourre/</a>
-  <a class="sm__link">/team/haley-boeschen/</a>
-  <a class="sm__link">/team/joe-marnen/</a>
-  <a class="sm__link">/team/katie-sharp/</a>
-  <a class="sm__link">/team/strongeru/</a>
-  <a class="sm__link">/team/robin-cabral/</a>
-  <a class="sm__link">/team/kyle-smucker-2/</a>
-  <a class="sm__link">/team/crystal-morrow/</a>
-  <a class="sm__link">/team/rashid-chapeyama/</a>
-  <a class="sm__link">/team/jon-snowden/</a>
-  <a class="sm__link">/team/alisha-johnson/</a>
-  <a class="sm__link">/team/jordan-phelps/</a>
-  <a class="sm__link">/team/scott-rubin/</a>
-  <a class="sm__link">/team/jason-cocking/</a>
-  <a class="sm__link">/team/quickbooks-made-easy/</a>
-  <a class="sm__link">/team/misty-novich/</a>
-  <a class="sm__link">/team/mary-calahane/</a>
-  <a class="sm__link">/team/pauline-bartel/</a>
-  <a class="sm__link">/team/thatcher-drew/</a>
-  <a class="sm__link">/team/laura-block/</a>
-  <a class="sm__link">/team/leigh-kelsey/</a>
-  <a class="sm__link">/team/julia-burns/</a>
-  <a class="sm__link">/team/donte-white/</a>
-  <a class="sm__link">/team/harrison-metcalf/</a>
-  <a class="sm__link">/team/hau-yu-wong/</a>
-  <a class="sm__link">/team/tim-sarrantonio/</a>
-  <a class="sm__link">/team/erin-strick/</a>
-  <a class="sm__link">/team/robin-mckay/</a>
-  <a class="sm__link">/team/colin-pizarek/</a>
-  <a class="sm__link">/team/ronnie-gomez/</a>
-  <a class="sm__link">/team/jamie-apone/</a>
-  <a class="sm__link">/team/erinn-greetis/</a>
-  <a class="sm__link">/software/</a>
-  <a class="sm__link">/software/quickbooks/</a>
-  <a class="sm__link">/software/eventbrite/</a>
-  <a class="sm__link">/software/track-bill/</a>
-  <a class="sm__link">/software/clickbid/</a>
-  <a class="sm__link">/software/npsc/</a>
-  <a class="sm__link">/software/continue-to-give/</a>
-  <a class="sm__link">/software/path-lms/</a>
-  <a class="sm__link">/software/donorhub/</a>
-  <a class="sm__link">/software/donor-trends/</a>
-  <a class="sm__link">/software/ujoin/</a>
-  <a class="sm__link">/software/one-click-politics/</a>
-  <a class="sm__link">/software/myrollcall/</a>
-  <a class="sm__link">/software/cougarmountain/</a>
-  <a class="sm__link">/software/constantcontact/</a>
-  <a class="sm__link">/software/zapier/</a>
-  <a class="sm__link">/software/causevid/</a>
-  <a class="sm__link">/software/rallybound/</a>
-  <a class="sm__link">/software/redarcsystems/</a>
-  <a class="sm__link">/software/truegivers/</a>
-  <a class="sm__link">/software/mailchimp/</a>
-  <a class="sm__link">/software/higher-logic/</a>
-  <a class="sm__link">/software/giv-bee/</a>
-  <a class="sm__link">/software/double-the-donation/</a>
-  <a class="sm__link">/software/givesmart/</a>
-  <a class="sm__link">/software/donorsearch/</a>
-  <a class="sm__link">/pricing/general/</a>
-  <a class="sm__link">/pricing/empower-unlimited/</a>
-  <a class="sm__link">/pricing/empower-250000/</a>
-  <a class="sm__link">/pricing/empower-100000/</a>
-  <a class="sm__link">/pricing/empower-50000/</a>
-  <a class="sm__link">/pricing/empower-25000/</a>
-  <a class="sm__link">/pricing/empower-15000/</a>
-  <a class="sm__link">/pricing/empower-5000/</a>
-  <a class="sm__link">/pricing/empower-1000/</a>
-  <a class="sm__link">/pricing/essentials-1000/</a>
-  <a class="sm__link">/pricing/up-to-1000-2/</a>
-  <a class="sm__link">/pricing/unlimited/</a>
-  <a class="sm__link">/pricing/up-to-250000/</a>
-  <a class="sm__link">/pricing/up-to-100000/</a>
-  <a class="sm__link">/pricing/up-to-50000/</a>
-  <a class="sm__link">/pricing/up-to-25000/</a>
-  <a class="sm__link">/pricing/up-to-15000/</a>
-  <a class="sm__link">/pricing/up-to-5000/</a>
-  <a class="sm__link">/pricing/up-to-1000/</a>
-  <a class="sm__link">/pricing/essentials-15000/</a>
-  <a class="sm__link">/pricing/alternatives/</a>
-  <a class="sm__link">/pricing/neon-alternatives-neon/</a>
-  <a class="sm__link">/pricing/etapestry/</a>
-  <a class="sm__link">/pricing/neon-etapestry/</a>
-  <a class="sm__link">/pricing/giftworks/</a>
-  <a class="sm__link">/pricing/neon-giftworks/</a>
-  <a class="sm__link">/pricing/donorperfect/</a>
-  <a class="sm__link">/pricing/neon-donorperfect/</a>
-  <a class="sm__link">/pricing/salesforce/</a>
-  <a class="sm__link">/pricing/neon-salesforce/</a>
-  <a class="sm__link">/pricing/kindful/</a>
-  <a class="sm__link">/pricing/neon-kindful/</a>
-  <a class="sm__link">/pricing/salsa/</a>
-  <a class="sm__link">/pricing/neon-salsa/</a>
-  <a class="sm__link">/pricing/network-for-good/</a>
-  <a class="sm__link">/pricing/neon-network-good/</a>
-  <a class="sm__link">/pricing/abila/</a>
-  <a class="sm__link">/pricing/neon-abila/</a>
-  <a class="sm__link">/pricing/neon-everyaction/</a>
-  <a class="sm__link">/pricing/little-green-light/</a>
-  <a class="sm__link">/pricing/neon-little-green-light/</a>
-  <a class="sm__link">/pricing/wild-apricot/</a>
-  <a class="sm__link">/pricing/neon-wild-apricot/</a>
-  <a class="sm__link">/pricing/civicrm/</a>
-  <a class="sm__link">/pricing/neon-civicrm/</a>
-  <a class="sm__link">/pricing/raisers-edge/</a>
-  <a class="sm__link">/pricing/neon-raisers-edge/</a>
-  <a class="sm__link">/pricing/everyaction/</a>
-  <a class="sm__link">/pricing/essentials-25000/</a>
-  <a class="sm__link">/pricing/essentials-general/</a>
-  <a class="sm__link">/pricing/impact-general/</a>
-  <a class="sm__link">/pricing/empower-general/</a>
-  <a class="sm__link">/pricing/inspire-diy-package/</a>
-  <a class="sm__link">/pricing/inspire-advanced-package/</a>
-  <a class="sm__link">/pricing/inspire-basics-package/</a>
-  <a class="sm__link">/pricing/ti-advanced-package/</a>
-  <a class="sm__link">/pricing/ti-starter-package/</a>
-  <a class="sm__link">/pricing/ti-starter-package-2/</a>
-  <a class="sm__link">/tab_slider/nonprofit-crm/</a>
-  <a class="sm__link">/tab_slider/neon-web-studio/</a>
-  <a class="sm__link">/tab_slider/neon-pro-services/</a>
-  <a class="sm__link">/tab_slider/essentials/</a>
-  <a class="sm__link">/tab_slider/impact/</a>
-  <a class="sm__link">/tab_slider/empower/</a>
-  <a class="sm__link">/tab_slider/event-listing-event-management/</a>
-  <a class="sm__link">/tab_slider/online-registration-event-management/</a>
-  <a class="sm__link">/tab_slider/advanced-ticketing-event-management/</a>
-  <a class="sm__link">/tab_slider/reporting-analytics-event-management/</a>
-  <a class="sm__link">/tab_slider/event-communication-event-management/</a>
-  <a class="sm__link">/tab_slider/attendee-tracking-event-management/</a>
-  <a class="sm__link">/tab_slider/payment-processing-event-management/</a>
-  <a class="sm__link">/tab_slider/volunteer-management-event-management/</a>
-  <a class="sm__link">/tab_slider/poc-membership/</a>
-  <a class="sm__link">/tab_slider/poc-fundraising/</a>
-  <a class="sm__link">/testimonial/2316/</a>
-  <a class="sm__link">/testimonial/2339/</a>
-  <a class="sm__link">/testimonial/mike-c/</a>
-  <a class="sm__link">/testimonial/etapestry/</a>
-  <a class="sm__link">/testimonial/giftworks/</a>
-  <a class="sm__link">/testimonial/salesforce/</a>
-  <a class="sm__link">/testimonial/easy-use-nonprofit-crm/</a>
-  <a class="sm__link">/testimonial/robust-capabilities/</a>
-  <a class="sm__link">/category/announcement/</a>
-  <a class="sm__link">/category/annual-campaigns/</a>
-  <a class="sm__link">/category/client-spotlight/</a>
-  <a class="sm__link">/category/data-management/</a>
-  <a class="sm__link">/category/donor-relations/</a>
-  <a class="sm__link">/category/fundraising-tips-and-best-practices/</a>
-  <a class="sm__link">/category/industry-trends-insights/</a>
-  <a class="sm__link">/category/marketing-communications/</a>
-  <a class="sm__link">/category/membership-management/</a>
-  <a class="sm__link">/category/neon-one-consulting-network/</a>
-  <a class="sm__link">/category/nonprofit-best-practices/</a>
-  <a class="sm__link">/category/nonprofit-software/</a>
-  <a class="sm__link">/category/nonprofit-websites-and-web-design/</a>
-  <a class="sm__link">/category/product-update/</a>
-  <a class="sm__link">/category/uncategorized/</a>
-  <a class="sm__link">/category/volunteer-management/</a>
-  <a class="sm__link">/category/year-end-giving/</a>
-  <a class="sm__link">/tag/givingtuesday/</a>
-  <a class="sm__link">/tag/2019-nonprofit-leadership-impact-study/</a>
-  <a class="sm__link">/tag/360matchpro/</a>
-  <a class="sm__link">/tag/abila/</a>
-  <a class="sm__link">/tag/adaptive-sports/</a>
-  <a class="sm__link">/tag/animal-welfare/</a>
-  <a class="sm__link">/tag/annual-funds/</a>
-  <a class="sm__link">/tag/anti-racism/</a>
-  <a class="sm__link">/tag/arts-culture-humanities-organization/</a>
-  <a class="sm__link">/tag/audience-segmentation/</a>
-  <a class="sm__link">/tag/blog/</a>
-  <a class="sm__link">/tag/board/</a>
-  <a class="sm__link">/tag/board-development/</a>
-  <a class="sm__link">/tag/business-growth/</a>
-  <a class="sm__link">/tag/call-to-action/</a>
-  <a class="sm__link">/tag/campaign-action-plan/</a>
-  <a class="sm__link">/tag/campaigns/</a>
-  <a class="sm__link">/tag/canadian-nonprofits/</a>
-  <a class="sm__link">/tag/capacity-camp/</a>
-  <a class="sm__link">/tag/cathexis-partners/</a>
-  <a class="sm__link">/tag/causevid/</a>
-  <a class="sm__link">/tag/chicago-repertory-ballet/</a>
-  <a class="sm__link">/tag/civicore/</a>
-  <a class="sm__link">/tag/client-spotlight/</a>
-  <a class="sm__link">/tag/communications/</a>
-  <a class="sm__link">/tag/company-announcements/</a>
-  <a class="sm__link">/tag/concord-art/</a>
-  <a class="sm__link">/tag/cra-compliance/</a>
-  <a class="sm__link">/tag/cra-receipts/</a>
-  <a class="sm__link">/tag/crm-solutions/</a>
-  <a class="sm__link">/tag/data-conversion/</a>
-  <a class="sm__link">/tag/data-management/</a>
-  <a class="sm__link">/tag/data-stewardship/</a>
-  <a class="sm__link">/tag/digital/</a>
-  <a class="sm__link">/tag/direct-mail/</a>
-  <a class="sm__link">/tag/diversity-in-the-workplace/</a>
-  <a class="sm__link">/tag/diy-fundraising-audit/</a>
-  <a class="sm__link">/tag/donation/</a>
-  <a class="sm__link">/tag/donor-appreciation/</a>
-  <a class="sm__link">/tag/donor-fraud/</a>
-  <a class="sm__link">/tag/donor-personas/</a>
-  <a class="sm__link">/tag/donor-relations/</a>
-  <a class="sm__link">/tag/donor-relationships/</a>
-  <a class="sm__link">/tag/donor-retention/</a>
-  <a class="sm__link">/tag/donors/</a>
-  <a class="sm__link">/tag/double-the-donation/</a>
-  <a class="sm__link">/tag/education-organizations/</a>
-  <a class="sm__link">/tag/email/</a>
-  <a class="sm__link">/tag/embracing-diversity/</a>
-  <a class="sm__link">/tag/end-of-year/</a>
-  <a class="sm__link">/tag/end-of-year-campaign/</a>
-  <a class="sm__link">/tag/end-of-year-campaigns/</a>
-  <a class="sm__link">/tag/fall-gala/</a>
-  <a class="sm__link">/tag/fastest-growing-companies/</a>
-  <a class="sm__link">/tag/free-download/</a>
-  <a class="sm__link">/tag/fundraising/</a>
-  <a class="sm__link">/tag/fundraising-consultant/</a>
-  <a class="sm__link">/tag/fundraising-data/</a>
-  <a class="sm__link">/tag/fundraising-events/</a>
-  <a class="sm__link">/tag/fundraising-report-card/</a>
-  <a class="sm__link">/tag/fundraising-tips/</a>
-  <a class="sm__link">/tag/future-of-nonprofit-fundraising/</a>
-  <a class="sm__link">/tag/general-data-protection-regulation-gdpr-legislation/</a>
-  <a class="sm__link">/tag/generational-giving/</a>
-  <a class="sm__link">/tag/giving-tree/</a>
-  <a class="sm__link">/tag/giving-tuesday/</a>
-  <a class="sm__link">/tag/grassroots-policy-campaign/</a>
-  <a class="sm__link">/tag/health/</a>
-  <a class="sm__link">/tag/health-organizations/</a>
-  <a class="sm__link">/tag/human-services/</a>
-  <a class="sm__link">/tag/human-services-organizations/</a>
-  <a class="sm__link">/tag/humanitarian-organizations/</a>
-  <a class="sm__link">/tag/inc-5000/</a>
-  <a class="sm__link">/tag/inc-5000-list/</a>
-  <a class="sm__link">/tag/industry-trends/</a>
-  <a class="sm__link">/tag/integrations/</a>
-  <a class="sm__link">/tag/international-organizations/</a>
-  <a class="sm__link">/tag/international-womens-day/</a>
-  <a class="sm__link">/tag/investment/</a>
-  <a class="sm__link">/tag/joy-ranch/</a>
-  <a class="sm__link">/tag/key-performance-indicators/</a>
-  <a class="sm__link">/tag/kpis/</a>
-  <a class="sm__link">/tag/lawrence-humane-society/</a>
-  <a class="sm__link">/tag/major-donors/</a>
-  <a class="sm__link">/tag/marketing/</a>
-  <a class="sm__link">/tag/matching-gifts/</a>
-  <a class="sm__link">/tag/medical-organizations/</a>
-  <a class="sm__link">/tag/member-renewal-letter/</a>
-  <a class="sm__link">/tag/member-retention/</a>
-  <a class="sm__link">/tag/membership-application/</a>
-  <a class="sm__link">/tag/membership-engagement/</a>
-  <a class="sm__link">/tag/membership-strategies/</a>
-  <a class="sm__link">/tag/mental-health/</a>
-  <a class="sm__link">/tag/national-association-of-judiciary-interpreters-and-translators/</a>
-  <a class="sm__link">/tag/neon-one/</a>
-  <a class="sm__link">/tag/neon-one-consulting-network/</a>
-  <a class="sm__link">/tag/neon-one-ecosystem/</a>
-  <a class="sm__link">/tag/neoncrm/</a>
-  <a class="sm__link">/tag/neoncrm-integration/</a>
-  <a class="sm__link">/tag/neoncrm-on-demand-support/</a>
-  <a class="sm__link">/tag/newsletters/</a>
-  <a class="sm__link">/tag/nonprofit/</a>
-  <a class="sm__link">/tag/nonprofit-advice/</a>
-  <a class="sm__link">/tag/nonprofit-committee/</a>
-  <a class="sm__link">/tag/nonprofit-copywriting/</a>
-  <a class="sm__link">/tag/nonprofit-crm/</a>
-  <a class="sm__link">/tag/nonprofit-culture/</a>
-  <a class="sm__link">/tag/nonprofit-fundraising/</a>
-  <a class="sm__link">/tag/nonprofit-pro/</a>
-  <a class="sm__link">/tag/nonprofit-site-visits/</a>
-  <a class="sm__link">/tag/nonprofit-software/</a>
-  <a class="sm__link">/tag/nonprofit-tech/</a>
-  <a class="sm__link">/tag/nonprofit-tech-solutions/</a>
-  <a class="sm__link">/tag/nonprofit-technology/</a>
-  <a class="sm__link">/tag/nonprofit-tips/</a>
-  <a class="sm__link">/tag/nonprofit-websites/</a>
-  <a class="sm__link">/tag/nutrition/</a>
-  <a class="sm__link">/tag/online-community/</a>
-  <a class="sm__link">/tag/online-engagement/</a>
-  <a class="sm__link">/tag/peer-to-peer-fundraising/</a>
-  <a class="sm__link">/tag/personalization/</a>
-  <a class="sm__link">/tag/phone-support/</a>
-  <a class="sm__link">/tag/planning/</a>
-  <a class="sm__link">/tag/planning-a-campaing/</a>
-  <a class="sm__link">/tag/print/</a>
-  <a class="sm__link">/tag/rallybound/</a>
-  <a class="sm__link">/tag/resources-for-the-professional/</a>
-  <a class="sm__link">/tag/rmc-foundation/</a>
-  <a class="sm__link">/tag/seo-tips/</a>
-  <a class="sm__link">/tag/small-shop-fundraising/</a>
-  <a class="sm__link">/tag/social-fundraising/</a>
-  <a class="sm__link">/tag/sports-and-recreation/</a>
-  <a class="sm__link">/tag/stress/</a>
-  <a class="sm__link">/tag/stress-management/</a>
-  <a class="sm__link">/tag/switching-databases/</a>
-  <a class="sm__link">/tag/tech-solutions/</a>
-  <a class="sm__link">/tag/tedx-talk/</a>
-  <a class="sm__link">/tag/text-to-give/</a>
-  <a class="sm__link">/tag/truegivers/</a>
-  <a class="sm__link">/tag/using-data/</a>
-  <a class="sm__link">/tag/valentines-day/</a>
-  <a class="sm__link">/tag/veterans-day/</a>
-  <a class="sm__link">/tag/veterans-nonprofits/</a>
-  <a class="sm__link">/tag/video/</a>
-  <a class="sm__link">/tag/webinar-recap/</a>
-  <a class="sm__link">/tag/womens-advocacy/</a>
-  <a class="sm__link">/tag/workflows/</a>
-  <a class="sm__link">/tag/workplace-culture/</a>
-  <a class="sm__link">/tag/workplace-cutlure/</a>
-  <a class="sm__link">/tag/wyoming-equality/</a>
-  <a class="sm__link">/tag/year-end-giving/</a>
-  <a class="sm__link">/tag/year-end-appeals/</a>
-  <a class="sm__link">/tag/year-end-fundraiser/</a>
-  <a class="sm__link">/tag/yourmembership/</a>
-  <a class="sm__link">/tag/zapier/</a>
-  <a class="sm__link">/type/link/</a>
-  <a class="sm__link">/employees_category/diversity/</a>
-  <a class="sm__link">/employees_category/fundraising/</a>
-  <a class="sm__link">/employees_category/marketing/</a>
-  <a class="sm__link">/employees_category/neon/</a>
-  <a class="sm__link">/employees_category/consultant/</a>
-  <a class="sm__link">/employees_category/quickbooks/</a>
-  <a class="sm__link">/employees_category/strategy-capacity-building/</a>
-  <a class="sm__link">/software_category/advocacy/</a>
-  <a class="sm__link">/software_category/analytics-and-reporting/</a>
-  <a class="sm__link">/software_category/auctions/</a>
-  <a class="sm__link">/software_category/community-management/</a>
-  <a class="sm__link">/software_category/creative-fundraising/</a>
-  <a class="sm__link">/software_category/database-optimization/</a>
-  <a class="sm__link">/software_category/email-and-marketing/</a>
-  <a class="sm__link">/software_category/events-and-ticketing/</a>
-  <a class="sm__link">/software_category/finances-and-accounting/</a>
-  <a class="sm__link">/software_category/matching-gifts/</a>
-  <a class="sm__link">/software_category/peer-to-peer-fundraising/</a>
-  <a class="sm__link">/software_category/video/</a>
-  <a class="sm__link">/software_category/wealth-and-prospect-research/</a>
-  <a class="sm__link">/testimonial_category/crm/</a>
-  <a class="sm__link">/testimonial_category/pro-services/</a>
-</div>
+
 <div class="img-holder"></div>
-<strong>https://www.neoncrm.com/</strong>
+<strong>All Neon One Properties</strong>
 <div class="appender tree">
-  <div><button class="info">/</button>&nbsp;<a href="https://www.neoncrm.com/" class="level_0" target="_blank">↗</a> (<span class="total"></span>)</div>
+
 </div>
 
 <script>
@@ -1041,127 +101,329 @@
   var arr = '↗';
   var toggle = '<button class="toggle">+</button>&nbsp;';
 
-  var depth_obj = {urls:['/'],children:{},path:'/',level:0};
-  $('.links a').each(function(){
-    var path = $(this).text();
+  var depth_obj = {children:{}};
+
+  var sitemap_json = [];
+
+  function pretty_path_split(path) {
+    if(path != '/') {
+
+        
+      if(path.indexOf('/') == 0) {
+        path = path.slice(1,path.length);
+      }
+      if(path.length && path[path.length -1] == '/') {
+        path = path.slice(0,path.length-1);
+      }
+      // console.log(path);
+      return path.split('/');
+    } else {
+      return ['/'];
+    }
     
-    //take off first and last if they are /
-    if(path.indexOf('/') == 0) {
-      path = path.slice(1,path.length);
-    }
-    // console.log(path);
-    if(path.length && path[path.length -1] == '/') {
-      path = path.slice(0,path.length-1);
+  }
+
+  var createLinks = function() {
+    for(var i=0;i<sitemap_json.length;i++){
+      var url = sitemap_json[i];
+      // console.log(url);
+      //first find out the host
+      var host = url.url.split('://')[1];
+
+      var hostPathArr = host.split('/');
+      
+      host = hostPathArr[0];
+      // console.log(host);
+      
+
+      //now get a path string, with leading/trailing slashes
+
+      var path = '/';
+      if(url.url.split(host)[1]) {
+        path = url.url.split(host)[1];
+        
+        if(path.indexOf('/') == 0) {
+          path = path.slice(1,path.length);
+        }
+        if(path.length && path[path.length -1] == '/') {
+          path = path.slice(0,path.length-1);
+        }
+      }
+
+      
+      
+      var path_split = path.split('/');
+      var fullpath_formatted = path=='/'?'/':'/'+path+'/';
+
+      url.fullpath_formatted = fullpath_formatted;
+      url.host = host;
+      url.path_split = path_split;
+
+      if(!depth_obj.children[host]) {
+        depth_obj.children[host] = {urls:['/'],children:{},path:'/',level:0};
+      }
+
+      if(path_split.length >= 1 || path.length != 0) {
+        var parent = depth_obj.children[host];
+        _.each(path_split,function(path_part,i){
+          var level = i + 1;
+          var path_part_formatted = path_part+'/';
+          if(path_part_formatted != '/'){
+            if(!parent.children[path_part_formatted]){
+              parent.children[path_part_formatted] = {urls:[],path:path_part_formatted,children:{},level:level};
+            }
+            
+            if(path_split.length == level) {
+              depth_obj.children[host].urls.push(fullpath_formatted);
+            }
+            parent = parent.children[path_part_formatted];
+          }
+        });
+      }
+
+     
+
     }
 
-    var path_split = path.split('/');
-    var fullpath_formatted = path==''?'/':'/'+path+'/';
-    // console.log(path_split);
+    console.log(depth_obj);
 
-    if(path_split.length >= 1 || path.length != 0) {
-      var parent = depth_obj;
-      _.each(path_split, function(path_part,i){
-        var level = i + 1;
-        var path_formatted = path_part+'/';
-        if(path_formatted != '/'){
-          if(!parent.children[path_formatted]){
-            parent.children[path_formatted] = {urls:[],path:path_formatted,children:{},level:level};
-          }
-          parent.children[path_formatted].urls.push(fullpath_formatted);
-          if(path_split.length == level) {
-            depth_obj.urls.push(fullpath_formatted);
-          }
-          parent = depth_obj.children[path_formatted];
+    //create the html
+
+    //loop through all children, get total counts, needs to go inifinite deep
+    var $appender = $('.appender');
+    _.each(depth_obj.children,function(v,k){ //some kind of serious recurision problem here is killing chrome, they are all nested at all levels?
+      //create a top level holder
+      var host = k;
+      // console.log(host);
+      var $host_parent = $(document.createElement('div'));
+      $host_parent.addClass('parent');
+      $host_parent.attr('data-count',1);
+      $host_parent.attr('data-host',host);
+      $host_parent.append('<p>'+toggle+'<button class="url">'+host+'/</button><a href="https://'+host+'" target="_blank">'+arr+'</a></p>');
+      $host_parent.append($(document.createElement('div')).addClass('children'));
+     
+      var host_count = 1;
+      var path_count = 0;
+
+      $appender.append($host_parent);
+
+      _.each(v.urls, function(url){
+        if(url!='/') {
+          host_count++;
+          var levels_to_make = pretty_path_split(url);
+          var $this_parent;
+          _.each(levels_to_make, function(level, idx){
+            path_count++;
+            var path_id = host+'|'+level+'|'+idx;
+            var parent_identified = false;
+
+            var last_level = idx==levels_to_make.length-1;
+            if(idx == 0) {
+              $this_parent = $host_parent; //always start back at the host/parent, which has to exist
+              parent_found = true;
+            } else {
+              // console.log(level, idx);
+              var parent_idx = idx-1;
+              var parent_path_id =  host+'|'+levels_to_make[parent_idx] +'|'+parent_idx;
+              $this_parent = $($this_parent.find('.children')[0]).find('[data-path-id="'+parent_path_id+'"]');
+
+            }
+            //now we have a path, and a path parent identified.
+            //if there is no parent (how could that be??) i dont think that can happen, but in case lets do an if check
+            if(parent_found || $this_parent.length) {
+              $this_parent = $($this_parent[0]);//turn it back into a jquery object
+              //does this path already exist?
+              var $self = $($this_parent.find('.children')[0]).find('[data-path-id="'+path_id+'"]');
+              
+              if($self.length) {
+                $self = $($self[0]);//turn it bakc into a jquery object
+
+                var $a = $self.children().first().find('a');
+                var $btn = $self.children().first().find('button.toggle');
+                //do i need to do anything at all? 
+                //if it is the last one, might need to add a href and either way increase the counter?
+                $self.attr('data-count',parseInt($self.attr('data-count'))+1);
+                
+                // console.log($a.length,$btn.length, last_level);
+
+                if(last_level){
+                  if(!$a.length){
+                    // console.log('ERROR: node existed but there was no link');
+                    $self.children().first().html('<p>'+toggle+'<button class="url">'+level+'</button><a target="_blank"  tabindex="-1" data-rel-path="'+host+url+'" href="https://'+host+url+'">'+arr+'</a></p>');
+                  }
+                } else {
+                  if(!$btn.length){
+                    // console.log('ERROR: node existed but no button');
+                    $self.children().first().prepend(toggle);
+                  }
+                }
+               
+                
+              } else {
+                //no existing child node at this path level on the current parent, need to create it
+                $self = $(document.createElement('div'));
+                $self.addClass('self');
+                $self.attr('data-count',0);
+                $self.attr('data-path-id',path_id);
+                if(last_level) {
+                  $self.attr('data-count',1);
+                  $self.append('<p><button class="url">'+level+'</button><a target="_blank" tabindex="-1" data-rel-path="'+host+url+'" href="https://'+host+url+'">'+arr+'</a></p>');
+                } else {
+                  $self.append('<p>'+toggle+level+'</p>');
+                }
+                
+                $self.attr('data-host',k);
+                $self.append($(document.createElement('div')).addClass('children'));
+                $($this_parent.find('.children')[0]).append($self);
+              }
+            } else {
+              console.log('ERROR: no parent div found');
+            }
+            
+          });
         }
         
       });
-    }
-    
-  });
+
+
+      console.log('parent', host, 'had', host_count, path_count);
+
+      
+    });
+
+
+    //sort links alphabetically
+    $('.children').each(function(){
+      var $list = $(this);
+      var items = $(this).children('div');
+      items.sort(function(a, b) {
+        // console.log('sorting?')
+        // console.log($(a).find('div:first-of-type').text(),$(b).find('div:first-of-type'));
+        return $($(a).find('p')[0]).text().toUpperCase().localeCompare($($(b).find('p')[0]).text().toUpperCase());
+      });
+      $.each(items, function(idx, itm) { $list.append(itm); });
+    });
+
+    //count links at each level
+    $('.parent').each(function(){
+      var count =$(this).find('a').length;
+      $(this).children().first().append('<span class="count">('+count+')</span>');
+    });
+    $('.self').each(function(){
+      var count = $(this).find('a').length;
+      if(count > 1) {
+        $(this).children().first().append('<span class="count">('+count+')</span>');
+      }
+      
+    });
+
+    //hook up any listeners
+    $('.toggle').click(function(){
+      if($(this).text() == '+') {
+        $(this).text('-');
+        $(this).parent().next().show();
+      } else {
+        $(this).text('+');
+        $(this).parent().next().hide();
+      }
+      
+    });
+
+    $('button.url').focus(function(){
+      populateUrlInfo($(this).parent());
+    });
+
+  }
+
+  
+  $.get('./sitemap_all.json')
+    .done(function(data){
+      console.log('got json');
+      sitemap_json = data;
+      createLinks();
+    })
+    .fail(function(err) {
+      console.log('error');
+    });
+
 
   //get some counts, maybe re-order by cound
-  depth_obj.count = depth_obj.urls.length;
-  _.forEach(depth_obj.children, function(level) {
-    level.count = level.urls.length;
-    _.forEach(level.children, function(sub_level){
-      sub_level.count = sub_level.urls.length;
-    });
+  // depth_obj.count = depth_obj.urls.length;
+  // _.forEach(depth_obj.children, function(level) {
+  //   level.count = level.urls.length;
+  //   _.forEach(level.children, function(sub_level){
+  //     sub_level.count = sub_level.urls.length;
+  //   });
 
-  });
-  console.log(depth_obj);
-  $('.total').text(depth_obj.urls.length);
-  var $appender = $('.appender');
-  var root = $('.level_0').attr('href');
-  $('.level_0')
-  _.forEach(depth_obj.children, function(level) {
-    // console.log(level);
-    var $parent = $(document.createElement('div'));
-    $parent.attr('data-count',level.count);
-    $parent.addClass('parent');
-    var spaces = '';
-    var count = level.count>1?'('+level.count+')':'';
-    for(var i=0;i<level.level;i++){
-      spaces+='&nbsp;'
-    }
+  // });
+  // console.log(depth_obj);
+  // $('.total').text(depth_obj.urls.length);
+  // var $appender = $('.appender');
+  // var root = $('.level_0').attr('href');
+  // $('.level_0')
+  // _.forEach(depth_obj.children, function(level) {
+  //   // console.log(level);
+  //   var $parent = $(document.createElement('div'));
+  //   $parent.attr('data-count',level.count);
+  //   $parent.addClass('parent');
+  //   var spaces = '';
+  //   var count = level.count>1?'('+level.count+')':'';
+  //   for(var i=0;i<level.level;i++){
+  //     spaces+='&nbsp;'
+  //   }
 
-    var has_children = _.keys(level.children).length;
-    var toggler = angle;
-    if(has_children) {
-      toggler = toggle;
-    }
+  //   var has_children = _.keys(level.children).length;
+  //   var toggler = angle;
+  //   if(has_children) {
+  //     toggler = toggle;
+  //   }
 
-    if(_.includes(level.urls,'/'+level.path)) { //if the path matches any children, this is a linkable top
-      $parent.append('<div>'+spaces+toggler+'<button class="info">'+level.path+'</button>&nbsp;<a href="'+root+level.path+'" target="_blank" class="level_'+level.level+'" tabindex="-1">'+arr+'</a> '+count+'</div>');
-    } else { //still create the top but not as a link
-      $parent.append('<div class="level_'+level.level+'">'+spaces+toggler+level.path+' '+count+'</div>');
-    }
-    if(_.keys(level.children).length) { //has children, this only works due to being 2 levels deep max //
-      _.forEach(level.children, function(sub_level){
-        var $sub_parent = $(document.createElement('div'));
-        $sub_parent.attr('data-count',sub_level.count);
-        $sub_parent.addClass('sub_parent');
-        var spaces = '';
-        var count = sub_level.count>1?'('+sub_level.count+')':'';
-        for(var i=0;i<sub_level.level;i++){
-          spaces+='&nbsp;'
-        }
-        if(_.includes(sub_level.urls,'/'+level.path+sub_level.path)) { //if the path matches any urls, this is a linkable sub
-          $sub_parent.append('<div>'+spaces+angle+'<button class="info">'+sub_level.path+'</button>&nbsp;<a href="'+root+level.path+sub_level.path+'" target="_blank" class="level_'+sub_level.level+'" tabindex="-1">'+arr+'</a> '+count+'</div>');
-        } else { //still create the top but not as a link
-          $sub_parent.append('<div class="level'+sub_level.level+'">'+spaces+angle+sub_level.path+' '+count+'</div>');
-        }
-        $parent.append($sub_parent);
-      });
-    }
-    $appender.append($parent);
-  });
+  //   if(_.includes(level.urls,'/'+level.path)) { //if the path matches any children, this is a linkable top
+  //     $parent.append('<div>'+spaces+toggler+'<button class="info">'+level.path+'</button>&nbsp;<a href="'+root+level.path+'" target="_blank" class="level_'+level.level+'" tabindex="-1">'+arr+'</a> '+count+'</div>');
+  //   } else { //still create the top but not as a link
+  //     $parent.append('<div class="level_'+level.level+'">'+spaces+toggler+level.path+' '+count+'</div>');
+  //   }
+  //   if(_.keys(level.children).length) { //has children, this only works due to being 2 levels deep max //
+  //     _.forEach(level.children, function(sub_level){
+  //       var $sub_parent = $(document.createElement('div'));
+  //       $sub_parent.attr('data-count',sub_level.count);
+  //       $sub_parent.addClass('sub_parent');
+  //       var spaces = '';
+  //       var count = sub_level.count>1?'('+sub_level.count+')':'';
+  //       for(var i=0;i<sub_level.level;i++){
+  //         spaces+='&nbsp;'
+  //       }
+  //       if(_.includes(sub_level.urls,'/'+level.path+sub_level.path)) { //if the path matches any urls, this is a linkable sub
+  //         $sub_parent.append('<div>'+spaces+angle+'<button class="info">'+sub_level.path+'</button>&nbsp;<a href="'+root+level.path+sub_level.path+'" target="_blank" class="level_'+sub_level.level+'" tabindex="-1">'+arr+'</a> '+count+'</div>');
+  //       } else { //still create the top but not as a link
+  //         $sub_parent.append('<div class="level'+sub_level.level+'">'+spaces+angle+sub_level.path+' '+count+'</div>');
+  //       }
+  //       $parent.append($sub_parent);
+  //     });
+  //   }
+  //   $appender.append($parent);
+  // });
 
 
 
-  var $list = $('.appender');
-  console.log($list);
-  var items = $list.children('.parent');
+  // var $list = $('.appender');
+  // console.log($list);
+  
 
-  items.sort(function(a, b) {
-    // console.log($(a).find('div:first-of-type').text(),$(b).find('div:first-of-type'));
-    return $(a).find('div:first-of-type').text().toUpperCase().localeCompare($(b).find('div:first-of-type').text().toUpperCase());
-  });
-  $.each(items, function(idx, itm) { $list.append(itm); });
+  // var $wrapper = $('.appender');
+  // $wrapper.find('.parent').sort(function(a, b) {
+  //   return +b.dataset.count - +a.dataset.count;
+  // })
+  // .appendTo($wrapper);
 
-  var $wrapper = $('.appender');
-  $wrapper.find('.parent').sort(function(a, b) {
-    return +b.dataset.count - +a.dataset.count;
-  })
-  .appendTo($wrapper);
-
-  $('.parent').each(function(){
-    var $list = $(this);
-    var items = $(this).children('.sub_parent').get();
-    items.sort(function(a, b) {
-      return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
-    });
-    $.each(items, function(idx, itm) { $list.append(itm); });
-  });
+  // $('.parent').each(function(){
+  //   var $list = $(this);
+  //   var items = $(this).children('.sub_parent').get();
+  //   items.sort(function(a, b) {
+  //     return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+  //   });
+  //   $.each(items, function(idx, itm) { $list.append(itm); });
+  // });
 
   function populateUrlInfo($el) {
     if($el.find('a').attr('href')) {
@@ -1170,13 +432,16 @@
       $img.addClass('img-preview');
       var href = $el.find('a').attr('href');
 
-      var json_src = './'+href.split(root)[1]+'stats.json';
+      var file_path = href.replace('https://','./')+'/';
+      file_path = file_path.replace('//','/');
+
+      console.log(href, file_path);
 
       $img.append('<p><strong><a target="_blank" href="'+href+'">'+href+'</a></strong></p>');
 
-      $.get(json_src)
+      $.get(file_path+'stats.json')
         .done(function(data){
-          var src = './'+href.split(root)[1]+'lighhouse_desktop.jpg';
+          var src = file_path+'lighhouse_desktop.jpg';
           $img.append('<a href="'+href+'" target="_blank"><img src="'+src+'"></a>');
 
           var $data = $(document.createElement('div'));
@@ -1207,20 +472,9 @@
   // $('button.info').click(function(){
   //   populateUrlInfo($(this).parent());
   // })
-  $('button.info').focus(function(){
-    populateUrlInfo($(this).parent());
-  });
 
-  $('.toggle').click(function(){
-    if($(this).text() == '+') {
-      $(this).text('-');
-      $(this).parent().parent().find('.sub_parent').show();
-    } else {
-      $(this).text('+');
-      $(this).parent().parent().find('.sub_parent').hide();
-    }
-    
-  });
+
+  
 
   
 </script>
