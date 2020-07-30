@@ -37,6 +37,7 @@ let rootUrls = [
   'https://www.civicore.com',
 ];
 
+let global_stats = {total_executions:0,total_task_time:0};
 
 var total_sitemap_link_count = 0;
 
@@ -47,7 +48,6 @@ const needs_rescrape = function(row) {
 
   return row.crawl_status == 'incomplete' || row.crawl_status == 'missing' || !row.crawl_status || has_no_sheet_status(row);
 
-  
 }
 const has_no_sheet_status = function(row) {
   return !row.sheet_status; // && (row.crawl_status == 'complete' || row.crawl_status == 'non_200');
@@ -90,9 +90,11 @@ const translate_json_to_google_sheet_format = function(json) {
   };
 }
 const upload_url_and_status_to_google_sheet = async function(url) {
+  let starttime = new Date().getTime();
+
   await check_url_for_status_and_completeness(url);
 
-  let starttime = new Date().getTime();
+  
   // get necessary data
 
   let existing_row = await utils.get_csv_row_by_url(url, 'sitemap_all.csv');
@@ -101,7 +103,7 @@ const upload_url_and_status_to_google_sheet = async function(url) {
 
   let full_host = await utils.determineHost(url);
   let path = await utils.determinePath(url);
-  let baseJson = {url:url, full_host:full_host, path:path, status:existing_status, timestamp: new Date().toString()};
+  let baseJson = {url:url, host:full_host, full_host:full_host, path:path, status:existing_status, timestamp: new Date().toString()};
 
   if(existing_status) {
     if(existing_status == 200 || existing_status == '200') {
@@ -138,6 +140,7 @@ const upload_url_and_status_to_google_sheet = async function(url) {
   await utils.update_csv_row_by_url(url, row_data, 'sitemap_all.csv');
 
   let elapsed = utils.computeSecondsDiff(starttime,new Date().getTime());
+  
   console.log('uploaded_url_stats_to_google | ' + elapsed+' s');
 
   return true;
@@ -211,6 +214,7 @@ const check_url_for_status_and_completeness = async function(url) {
   await utils.update_csv_row_by_url(url, row_data, 'sitemap_all.csv');
 
   let elapsed = utils.computeSecondsDiff(starttime,new Date().getTime());
+  
   console.log('checked status and completeness | ' + elapsed+' s');
 
   return true;
@@ -234,7 +238,11 @@ const find_an_unchecked_url_in_sitemap = async function(elibilityFunction) {
       stats.ineligible++;
     }
   }
+
+  stats.togo = stats.total - stats.ineligible;
   console.log(stats.ineligible, 'of',stats.total,'links finished', new Date().toString());
+  global_stats.togo = stats.togo;
+
   return found_matching_url;
 }
 
@@ -254,7 +262,17 @@ const do_something_to_all_sitemap_links = async function(toDoFunction, elibility
         await utils.wait(delay);
       }
       let elapsed = utils.computeSecondsDiff(starttime2, new Date().getTime());
+      
+      global_stats.total_executions = global_stats.total_executions + 1;
+      global_stats.total_task_time = global_stats.total_task_time + elapsed;
+      if(global_stats.total_executions && global_stats.total_task_time) {
+        global_stats.average_task_time = global_stats.total_task_time / global_stats.total_executions;  
+      } else {
+        global_stats.average_task_time = 1;
+      }
       console.log(next_url +' completed | ' + elapsed+' s');
+      console.log(Math.round(global_stats.togo * global_stats.average_task_time /60/60 *100)/100 +' hrs togo @ '+global_stats.average_task_time+' seconds per task');
+
       await findAnother();
     } else {
       let elapsed = utils.computeSecondsDiff(starttime,new Date().getTime());
@@ -271,7 +289,7 @@ const start = async function() {
     await do_something_to_all_sitemap_links(check_url_for_status_and_completeness, has_no_status, 0);
   } else if(task == 'google') {
     await setup_google_sheet();
-    await do_something_to_all_sitemap_links(upload_url_and_status_to_google_sheet, has_no_sheet_status, 1000);
+    await do_something_to_all_sitemap_links(upload_url_and_status_to_google_sheet, has_no_sheet_status, 500);
   } else if(task == 'rescrape') {
     await setup_google_sheet();
     await do_something_to_all_sitemap_links(rescrape_incomplete_url, needs_rescrape, 500);

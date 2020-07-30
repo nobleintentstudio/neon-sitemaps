@@ -620,6 +620,7 @@ const mark_all_completions = async function() {
   await checkForAnotherURLToScrape(args);
 }
 const not_file = function(url) {
+  
   var is_file = url.indexOf('.png')>-1 ||
     url.indexOf('.pdf')>-1||
     url.indexOf('.jpg')>-1||
@@ -627,6 +628,7 @@ const not_file = function(url) {
     url.indexOf('.svg')>-1||
     url.indexOf('.jpeg')>-1;
 
+  console.log('url we are looking at', url, is_file);
   return !is_file;
 }
 
@@ -641,12 +643,16 @@ const remove_duplicates_from_sitemap = async function() {
   console.log(sitemap_urls.length, 'initial urls');
   sitemap_urls = _.filter(sitemap_urls,function(row){
     let main_url = row.url.split('://')[1] + '/';
+    main_url = main_url.split(' ').join('');
     main_url = main_url.replace('//','/');
     main_url = 'https://' + main_url;
     main_url = main_url.replace(/"/g, '');
     main_url = main_url.trim();
     main_url = main_url.replace('://neoncrm','://www.neoncrm');
+    main_url = main_url.split('#')[0];
+    main_url = main_url.split('?')[0];
     row.url = main_url;
+
 
     if(not_file(row.url)&&row.url.length) {
       return row;
