@@ -37,7 +37,7 @@ let rootUrls = [
   'https://www.civicore.com',
 ];
 
-let global_stats = {total_executions:0,total_task_time:0};
+let global_stats = {total_executions:0,total_task_time:0,successes:0};
 
 var total_sitemap_link_count = 0;
 
@@ -54,6 +54,10 @@ const has_no_sheet_status = function(row) {
 }
 const has_3xx = function(row) {
   return row.status.indexOf('3') == 0;
+}
+
+const has_no_analytics_status = function(row) {
+  return !row.analytics_status && row.status == 200;
 }
 
 const translate_json_to_google_sheet_format = function(json) {
@@ -144,6 +148,37 @@ const upload_url_and_status_to_google_sheet = async function(url) {
   console.log('uploaded_url_stats_to_google | ' + elapsed+' s');
 
   return true;
+}
+
+const get_url_visits = async function(url) {
+  let starttime = new Date().getTime();
+
+  let visits = await utils.get_visits_from_ga(url);
+
+  let retry = setTimeout(function(){
+    console.log('!!!!!!!!!!!!!!!!!!!!');
+    console.log('no response from updating google row after 10 seconds');
+    console.log('!!!!!!!!!!!!!!!!!!!!');
+    do_something_to_all_sitemap_links(get_url_visits, has_no_analytics_status, 2000);
+    return false;
+  }, 10000);
+  let updated = await utils.update_google_row_by_url(data_sheet,url,'visits',visits);
+
+  if(updated) {
+    clearTimeout(retry);
+    await utils.update_csv_row_by_url(url, {analytics_status:'complete'}, 'sitemap_all.csv');
+  } else {
+    console.log('!!!!!!!!!!!!!!!!!!!!');
+    console.log('not updated');
+    console.log('!!!!!!!!!!!!!!!!!!!!');
+  }
+  
+
+  let elapsed = utils.computeSecondsDiff(starttime,new Date().getTime());
+  console.log('get_url_visits to_sheet | ' + elapsed+' s');
+
+  return true;
+
 }
 
 const scrape_neon_url = async function(url) {
@@ -241,6 +276,7 @@ const find_an_unchecked_url_in_sitemap = async function(elibilityFunction) {
 
   stats.togo = stats.total - stats.ineligible;
   console.log(stats.ineligible, 'of',stats.total,'links finished', new Date().toString());
+  
   global_stats.togo = stats.togo;
 
   return found_matching_url;
@@ -266,13 +302,14 @@ const do_something_to_all_sitemap_links = async function(toDoFunction, elibility
       global_stats.total_executions = global_stats.total_executions + 1;
       global_stats.total_task_time = global_stats.total_task_time + elapsed;
       if(global_stats.total_executions && global_stats.total_task_time) {
-        global_stats.average_task_time = global_stats.total_task_time / global_stats.total_executions;  
+        global_stats.average_task_time = Math.round(100* global_stats.total_task_time / global_stats.total_executions)/100;  
       } else {
         global_stats.average_task_time = 1;
       }
       console.log(next_url +' completed | ' + elapsed+' s');
       console.log(Math.round(global_stats.togo * global_stats.average_task_time /60/60 *100)/100 +' hrs togo @ '+global_stats.average_task_time+' seconds per task');
-
+      global_stats.successes = global_stats.successes + 1;
+      console.log(global_stats.successes, 'successful executions');
       await findAnother();
     } else {
       let elapsed = utils.computeSecondsDiff(starttime,new Date().getTime());
@@ -293,6 +330,10 @@ const start = async function() {
   } else if(task == 'rescrape') {
     await setup_google_sheet();
     await do_something_to_all_sitemap_links(rescrape_incomplete_url, needs_rescrape, 500);
+  } else if(task == 'analytics') {
+    await setup_google_sheet();
+    // await get_url_visits('https://neonone.com/')
+    await do_something_to_all_sitemap_links(get_url_visits, has_no_analytics_status, 2000);
   }
 
   // get_neon_sitemaps();

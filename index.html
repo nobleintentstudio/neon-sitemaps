@@ -5,6 +5,10 @@
   <meta charset="UTF-8" />
   <title>https://www.neoncrm.com/</title>
   <style>
+    .tree p {
+      display: inline-block;
+      /*background: green;*/
+    }
     body, html {
       font-family: monospace;
       color: #333;
@@ -26,6 +30,9 @@
     }
     .tree a:hover {
       
+    }
+    button.url {
+      background:red;
     }
     .img-holder {
       position: fixed;
@@ -73,12 +80,16 @@
     p {
       margin: 0;
     }
-    button {
+    button:not(.status-toggle) {
       appearance: none;
       background: transparent;
       border: none;
       padding:0;
       margin:0;
+    }
+    .status-toggle {
+      appearance: button;
+      margin-right: 10px;
     }
   </style>
   <script
@@ -331,7 +342,7 @@
       
     });
 
-    $('button.url').focus(function(){
+    $('button.url').click(function(){
       populateUrlInfo($(this).parent());
     });
 
@@ -427,7 +438,29 @@
   //   $.each(items, function(idx, itm) { $list.append(itm); });
   // });
 
+  function statusToPretty(status) {
+    if(status == 'N') {
+      return 'nothing/keep';
+    }
+    if(status == 'M') {
+
+      return 'migrate';
+    }
+    if(status == 'F') {
+      return 'forward';
+    }
+    if(status == 'R') {
+      return 'remove';
+    }
+  }
+  function makeFullUrl(href) {
+    if(href.split('')[href.split('').length-1] != '/') {
+      href = href+'/';
+    }
+    return href;
+  }
   function populateUrlInfo($el) {
+    console.log('populating url info');
     $('.img-holder').show();
     if($el.find('a').attr('href')) {
 
@@ -461,6 +494,46 @@
 
           $img.append($data);
           $('.img-holder').html($img.html());
+          $.get('https://kill-or-keep.glitch.me/status?url='+makeFullUrl(href))
+            .done(function(data){
+              console.log(data.status);
+              var $status = $(document.createElement('div'));
+              if(data.status) {
+                $status.append('<p>Plan: <strong class="current-status">'+statusToPretty(data.status)+'</strong></p>');
+              } else {
+                $status.append('<p class="no-status-yet"><strong>No Plan Yet</strong></p>');
+              }
+              var statusOptions = [{short:'N',pretty:'nothing/keep'},{short:'F',pretty:'forward'},{short:'R',pretty:'remove'},{short:'M',pretty:'migrate'}]; //nothing, forward, remove, migrate
+              for(var i=0;i<statusOptions.length;i++) {
+                $status.append('<button class="status-toggle" data-status="'+statusOptions[i].short+'" data-url="'+href+'">'+statusOptions[i].pretty+'</button>');
+              }
+              
+              $('.img-holder').append($status);
+
+              $('.status-toggle').click(function(e){
+                e.preventDefault();
+
+                var url = $(this).attr('data-url');
+                var newStatus = $(this).attr('data-status');
+                
+                console.log('clicked', url, newStatus);
+
+                $('.current-status').text('saving');
+                $('.no-status-yet').html('Plan: <strong class="current-status">saving</strong>');
+                $('.status-toggle').each(function(){
+                  $(this).attr('disabled','disabled');
+                });
+ 
+                $.get('https://kill-or-keep.glitch.me/update?url='+makeFullUrl(href)+'&status='+newStatus)
+                  .done(function(data){
+                    $('.current-status').text(statusToPretty(data.status));
+                    $('.status-toggle').each(function(){
+                      $(this).attr('disabled',false);
+                    });
+                  });
+              })
+              
+            });
         })
         .fail(function(err) {
           console.log('failed');
