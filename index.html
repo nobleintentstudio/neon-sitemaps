@@ -326,7 +326,7 @@ function getAStat(stat,value) {
 var statusOptions = [{short:'',pretty:'no plan yet'},{short:'N',pretty:'nothing/keep'},{short:'F',pretty:'forward'},{short:'R',pretty:'remove'},{short:'M',pretty:'migrate'}]; //nothing, forward, remove, migrate
 
 function getDropdown(selected,url) {
-  var drop_down = `<select disabled value="${selected}" data-url="${url}" class="status-options">`;
+  var drop_down = `<select value="${selected}" data-url="${url}" class="status-options">`;
   for(var i=0;i<statusOptions.length;i++) {
     if(selected==statusOptions[i].short) {
       drop_down += `<option selected="selected" value="${statusOptions[i].short}">${statusOptions[i].pretty}</option>`;
@@ -338,6 +338,7 @@ function getDropdown(selected,url) {
   return drop_down;
 }
 function getStatusSheet(){
+  loading('getting current plan information');
   var status_sheet_id = '1ZiwEAAqVtHiuBUvEZ9WerK2WATXt4iVcMyS1AigGVKw';
   var status_sheet_url = `https://spreadsheets.google.com/feeds/list/${status_sheet_id}/1/public/basic?alt=json`;
   $.get(status_sheet_url).done(function(data){
@@ -358,6 +359,7 @@ function getStatusSheet(){
 
         tree_data.status_data[rowObj.url] = rowObj.plan;
       }
+      loading('ready');
   });
 }
 
