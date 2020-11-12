@@ -278,7 +278,7 @@ c.toggle = '<button class="toggle"></button>&nbsp;';
 c.space = '&nbsp;';
 
 
-var tree_data = {sheet_data:{},tree:{},sheet_data_obj:{}};
+var tree_data = {sheet_data:{},tree:{},sheet_data_obj:{},status_data:{}};
 
 
 function loading(text) {
@@ -310,6 +310,8 @@ $(document).ready(async function(){
     fillInfoBox($(this).parent().attr('data-url'));
   });
 
+  getStatusSheet();
+
 });
 
 function getAStat(stat,value) {
@@ -324,7 +326,7 @@ function getAStat(stat,value) {
 var statusOptions = [{short:'',pretty:'no plan yet'},{short:'N',pretty:'nothing/keep'},{short:'F',pretty:'forward'},{short:'R',pretty:'remove'},{short:'M',pretty:'migrate'}]; //nothing, forward, remove, migrate
 
 function getDropdown(selected,url) {
-  var drop_down = `<select value="${selected}" data-url="${url}" class="status-options">`;
+  var drop_down = `<select disabled value="${selected}" data-url="${url}" class="status-options">`;
   for(var i=0;i<statusOptions.length;i++) {
     if(selected==statusOptions[i].short) {
       drop_down += `<option selected="selected" value="${statusOptions[i].short}">${statusOptions[i].pretty}</option>`;
@@ -335,42 +337,68 @@ function getDropdown(selected,url) {
   drop_down += `<select>`;
   return drop_down;
 }
+function getStatusSheet(){
+  var status_sheet_id = '1ZiwEAAqVtHiuBUvEZ9WerK2WATXt4iVcMyS1AigGVKw';
+  var status_sheet_url = `https://spreadsheets.google.com/feeds/list/${status_sheet_id}/1/public/basic?alt=json`;
+  $.get(status_sheet_url).done(function(data){
+      var cells = data.feed.entry;
+      // console.log(cells);
+      for (var i = 0; i < cells.length; i++){
+        var rowObj = {};
+        // console.log(cells[i]);
+        rowObj.url = cells[i].title.$t;
+        var rowCols = cells[i].content.$t.split(', ');
+        for (var j = 0; j < rowCols.length; j++){
+          var keyVal = rowCols[j].split(':');
+          if(keyVal[1]){
+            rowObj[keyVal[0].trim()] = keyVal[1].trim();
+          }
+          
+        }
+
+        tree_data.status_data[rowObj.url] = rowObj.plan;
+      }
+  });
+}
+
+function get_url_status(url) {
+  return tree_data.status_data[url];
+}
 function fillInfoBox(url) {
   $('.plan').html('fetching current plan...');
   $('.data-box').show();
   loading('fetching current plan for '+url);
   window.setTimeout(function(){loading('ready')},2000);
-  $.get('https://kill-or-keep.glitch.me/status?url='+makeFullUrl(url))
-    .done(function(data){
-      var dropdown = getDropdown(data.status,url);
-      $('.plan').html(dropdown);
-      
-      $('.status-options').change(function(){
-        var newStatus = $(this).val();
-        var url = $(this).attr('data-url');
-        loading('changing plan for '+url);
-        $.get('https://kill-or-keep.glitch.me/update?url='+makeFullUrl(url)+'&status='+newStatus)
-          .done(function(data){
-            console.log(data);
-            loading('plan for '+url+' changed');
-            window.setTimeout(function(){loading('ready')},2000);
-          });
+
+  var dropdown = getDropdown(get_url_status(url),url);
+  $('.plan').html(dropdown);
+  
+  $('.status-options').change(function(){
+    var newStatus = $(this).val();
+    var url = $(this).attr('data-url');
+    loading('changing plan for '+url);
+
+    $.get('https://kill-or-keep.glitch.me/update?url='+makeFullUrl(url)+'&status='+newStatus)
+      .done(function(data){
+        tree_data.status_data[makeFullUrl(url)] = newStatus;
+        console.log(data);
+        loading('plan for '+url+' changed');
+        window.setTimeout(function(){loading('ready')},2000);
       });
-      
-    });
+  });
+
   var row = tree_data.sheet_data_obj[url];
   var stats = '';
   stats+=getAStat('status', row.status);
-  stats+=getAStat('speed', row.lh_desktop_perf);
-  stats+=getAStat('seo', row.lh_mobile_seo);
+  stats+=getAStat('speed', row.lh_desktop_perf || row.lhdesktopperf);
+  stats+=getAStat('seo', row.lh_mobile_seo|| row.lhmobileseo);
 
-  stats+=getAStat('visits (1 year)', row.hits_1_year);
+  stats+=getAStat('visits (1 year)', row.hits_1_year || row.hits1year);
   
   $('.stats-box').html(stats);
   $('.title').html(`<a href="${url} target="_blank">${url}</a>`);
   $('#preview').attr('src',url);
 }
-
 
 
 function processDomainLinks() {
@@ -498,18 +526,48 @@ function flattenData(arr) {
 }
 
 function getLinkList(domain,data_source,key) {
+  //backup url:
+  //https://spreadsheets.google.com/feeds/list/{{yourkey}}/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK
+  //https://spreadsheets.google.com/feeds/list/1GfkJ8qqTVTc4xPk1s1IO1WYAhrcRYiAaEjhV_Chb1ZQ/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK
   //data source not used yet
   return new Promise ((resolve, reject) => {
-    $.get('https://gson.glitch.me/',{domain:domain,sheet:key}, function(data) {
-      if(data.length) {
-        tree_data.sheet_data[domain] = data;
-        resolve(data);
-        flattenData(data);
+    $.get(`https://spreadsheets.google.com/feeds/list/${key}/1/public/basic`,{alt:'json'}, function(data) {
+      console.log(data);
+      var cells = data.feed.entry;
+      // console.log(cells);
+      var rows = [];
+      for (var i = 0; i < cells.length; i++){
+        var rowObj = {};
+        // console.log(cells[i]);
+        rowObj.url = cells[i].title.$t;
+        var rowCols = cells[i].content.$t.split(',');
+        for (var j = 0; j < rowCols.length; j++){
+          var keyVal = rowCols[j].split(':');
+          rowObj[keyVal[0].trim()] = keyVal[1].trim();
+        }
+        rows.push(rowObj);
+      }
+      if(rows.length) {
+        tree_data.sheet_data[domain] = rows;
+        resolve(rows);
+        flattenData(rows);
       } else {
         reject();
       }
     });
   });
+
+  // return new Promise ((resolve, reject) => {
+  //   $.get('https://gson.glitch.me/',{domain:domain,sheet:key}, function(data) {
+  //     if(data.length) {
+  //       tree_data.sheet_data[domain] = data;
+  //       resolve(data);
+  //       flattenData(data);
+  //     } else {
+  //       reject();
+  //     }
+  //   });
+  // });
   
 
 }</script>
