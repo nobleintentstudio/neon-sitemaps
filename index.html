@@ -3,95 +3,244 @@
 <head>
 
   <meta charset="UTF-8" />
-  <title>https://www.neoncrm.com/</title>
-  <style>
-    .tree p {
-      display: inline-block;
-      /*background: green;*/
-    }
-    body, html {
-      font-family: monospace;
-      color: #333;
-      box-sizing: border-box;
-    }
-    * {
-      font-family: inherit;
-      color: inherit;
-      box-sizing: inherit;
-    }
-    .links a {
-      display: none;
-    }
-    .tree {
+  <title>{{title}}</title>
+  <style>html, * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
 
-    }
-    .tree a {
-      
-    }
-    .tree a:hover {
-      
-    }
-    button.url {
-      background:red;
-    }
-    .img-holder {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-    }
-    .img-holder {
-      width: 500px;
-      white-space: nowrap;
-      background: #ffffff;
-      z-index: 1;
+.data-box {
+  max-width: 600px;
+  width: 600px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 2px solid black;
+  min-height: 404px; }
+  .data-box iframe {
+    border: none;
+    width: 1200px;
+    height: 800px;
+    top: 0;
+    left: 0;
+    position: relative;
+    margin-bottom: -400px;
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
+    -ms-transform-origin: top left;
+    -o-transform-origin: top left;
+    transform-origin: top left;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    background: white; }
+  .data-box .title {
+    text-align: center;
+    margin: 10px; }
+  .data-box .stats-box {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px 0; }
+    .data-box .stats-box .stat {
+      border: 1px solid black;
       padding: 5px;
-      border: 3px solid black;
-      overflow: scroll;
-      line-height: 1.5;
-    }
-    .img-holder p a {
-      padding-bottom: 5px;
-    }
-    .img-holder img {
-      display: block;
-      border: 3px solid #333;
-      width: 100%;
-      /*margin: 10px 0;*/
-      border-left: 0;
-      border-right: 0;
-      width: calc(100% + 10px);
-      margin-left: -5px;
+      margin-right: 1px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -moz-box-orient: vertical;
+      -moz-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -moz-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -moz-box-align: center;
+      -ms-flex-align: center;
+      align-items: center; }
+      .data-box .stats-box .stat strong {
+        display: block; }
+  .data-box .info {
+    padding: 20px; }
+    .data-box .info h3 {
+      margin-bottom: 5px; }
 
-    }
+.loading {
+  font-style: italic;
+  margin-bottom: 10px; }
 
-    .sub_parent {
-      display: none;
-    }
-    .toggle {
-      cursor: pointer;
-    }
-    .root {
-      font-weight: bold;
-    }
-    .children {
-      padding-left: 2em;
-      display: none;
-    }
-    p {
-      margin: 0;
-    }
-    button:not(.status-toggle) {
-      appearance: none;
-      background: transparent;
-      border: none;
-      padding:0;
-      margin:0;
-    }
-    .status-toggle {
-      appearance: button;
-      margin-right: 10px;
-    }
-  </style>
+.bullet-status {
+  display: none; }
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 20px; }
+
+.bucket-title a, .bucket-title {
+  font-weight: normal; }
+
+button.url {
+  font-weight: bold; }
+
+.toggle:before {
+  content: '+'; }
+
+.toggle.open:before {
+  content: '-'; }
+
+.tree .bucket-list {
+  display: none; }
+
+.bucket-title .forwarding:after {
+  content: '(will forward)';
+  font-style: italic; }
+
+.bucket-title .no-plan:after {
+  content: '(no plan yet)';
+  font-style: italic; }
+
+.bucket-title .remove:after {
+  content: '(will remove)';
+  font-style: italic; }
+
+.bucket-title .migrate:after {
+  content: '(will migrate)';
+  font-style: italic; }
+
+.tree p {
+  display: inline-block;
+  /*background: green;*/ }
+
+body, html {
+  font-family: monospace;
+  color: #333;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+* {
+  font-family: inherit;
+  color: inherit;
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit; }
+
+.links a {
+  display: none; }
+
+button.url {
+  background: red; }
+
+.img-holder {
+  position: fixed;
+  top: 20px;
+  right: 20px; }
+
+.img-holder {
+  width: 500px;
+  white-space: nowrap;
+  background: #ffffff;
+  z-index: 1;
+  padding: 5px;
+  border: 3px solid black;
+  overflow: scroll;
+  line-height: 1.5; }
+
+.img-holder p a {
+  padding-bottom: 5px; }
+
+.img-holder img {
+  display: block;
+  border: 3px solid #333;
+  width: 100%;
+  /*margin: 10px 0;*/
+  border-left: 0;
+  border-right: 0;
+  width: -webkit-calc(100% + 10px);
+  width: -moz-calc(100% + 10px);
+  width: calc(100% + 10px);
+  margin-left: -5px; }
+
+.sub_parent {
+  display: none; }
+
+.toggle {
+  cursor: pointer; }
+
+.root {
+  font-weight: bold; }
+
+.children {
+  padding-left: 2em;
+  display: none; }
+
+p {
+  margin: 0; }
+
+button:not(.status-toggle) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0; }
+
+.status-toggle {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  margin-right: 10px; }
+</style>
+
+  <script>
+    window.treemaker = {
+      title: 'Neon One Properties',
+      domains: [{
+        root: 'https://neonone.com/',
+        data_source: 'google',
+        key: '1Di_LCl8RJlXk1IQHEe76ekCZVh6U_n3AxxiwiuV8W_o' 
+      },{
+        root: 'https://www.neoncrm.com/',
+        data_source: 'google',
+        key: '1GfkJ8qqTVTc4xPk1s1IO1WYAhrcRYiAaEjhV_Chb1ZQ' 
+      },{
+        root: 'https://www.arts-people.com/',
+        data_source: 'google',
+        key: '1bwTtF2xjrwjG7zVFr4WMy4HFYNwUkVXnbij0si1vKtw' 
+      },{
+        root: 'https://www.civicore.com/',
+        data_source: 'google',
+        key: '1ZARnXj7L8kXn1T-EWnIkdq7U0feAlhQphUIZDTpuk5U' 
+      },{
+        root: 'https://rallybound.com/',
+        data_source: 'google',
+        key: '1_ZE-Z4ue2IiUshS2-NDWLd5ZF-E1Jj7M6Q0l8XeJATc' 
+      }]
+    };
+  </script>
+
   <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -101,458 +250,269 @@
 <body>
 
 <div class="img-holder" style="display:none"></div>
-<strong>All Neon One Properties</strong>
-<div class="loading"><em>loading...</em></div>
+<h1>Neon One Properties</h1>
+<div class="loading">loading...</div>
+<div class="helper">worksheet: <a href="https://docs.google.com/spreadsheets/d/1ZiwEAAqVtHiuBUvEZ9WerK2WATXt4iVcMyS1AigGVKw/edit#gid=0" target="_blank">https://docs.google.com/spreadsheets/d/1ZiwEAAqVtHiuBUvEZ9WerK2WATXt4iVcMyS1AigGVKw/edit#gid=0</a></div>
+<hr>
 <div class="appender tree">
 
 </div>
 
-<script>
+<div class="data-box" style="display:none">
+  <div class="title"></div>
+  <iframe src="" id="preview"></iframe>
+  <div class="info">
+    <h3>Stats:</h3>
+    <div class="stats-box">
+    </div>
+    <h3>Plan:</h3>
+    <div class="plan">fetching current plan...</div>
+  </div>
+</div>
 
-  var angle = '└&nbsp;';
-  var arr = '↗';
-  var toggle = '<button class="toggle">+</button>&nbsp;';
 
-  var depth_obj = {children:{}};
+<script>var c = {};
+c.angle = '&nbsp;└&nbsp;';
+c.arr = '↗';
+c.toggle = '<button class="toggle"></button>&nbsp;';
+c.space = '&nbsp;';
 
-  var sitemap_json = [];
 
-  function pretty_path_split(path) {
-    if(path != '/') {
+var tree_data = {sheet_data:{},tree:{},sheet_data_obj:{}};
 
-        
-      if(path.indexOf('/') == 0) {
-        path = path.slice(1,path.length);
-      }
-      if(path.length && path[path.length -1] == '/') {
-        path = path.slice(0,path.length-1);
-      }
-      // console.log(path);
-      return path.split('/');
-    } else {
-      return ['/'];
-    }
-    
+
+function loading(text) {
+  $('.loading').text(text);
+}
+$(document).ready(async function(){
+  $('title').text(treemaker.title);
+  //this kicks things off
+  for(var i=0;i<window.treemaker.domains.length;i++){
+    var domain = window.treemaker.domains[i];
+    createDomainTree(domain.root);
+    loading('finding data for '+domain.root);
+    await getLinkList(domain.root,domain.data_source,domain.key);
   }
+  processDomainLinks();
 
-  var createLinks = function() {
-    for(var i=0;i<sitemap_json.length;i++){
-      var url = sitemap_json[i];
-      // console.log(url);
-      //first find out the host
-      var host = url.url.split('://')[1];
+  $('.toggle').click(function(e){
+    e.preventDefault();
+    var bucket = $(this).parent().attr('data-bucket');
+    var children = $('.bucket-list[data-bucket="'+bucket+'"')
+    children.toggle();
+    $(this).toggleClass('open');
+  });
 
-      var hostPathArr = host.split('/');
-      
-      host = hostPathArr[0];
-      // console.log(host);
-      
-
-      //now get a path string, with leading/trailing slashes
-
-      var path = '/';
-      if(url.url.split(host)[1]) {
-        path = url.url.split(host)[1];
-        
-        if(path.indexOf('/') == 0) {
-          path = path.slice(1,path.length);
-        }
-        if(path.length && path[path.length -1] == '/') {
-          path = path.slice(0,path.length-1);
-        }
-      }
-
-      
-      
-      var path_split = path.split('/');
-      var fullpath_formatted = path=='/'?'/':'/'+path+'/';
-
-      url.fullpath_formatted = fullpath_formatted;
-      url.host = host;
-      url.path_split = path_split;
-
-      if(!depth_obj.children[host]) {
-        depth_obj.children[host] = {urls:['/'],children:{},path:'/',level:0};
-      }
-
-      if(path_split.length >= 1 || path.length != 0) {
-        var parent = depth_obj.children[host];
-        _.each(path_split,function(path_part,i){
-          var level = i + 1;
-          var path_part_formatted = path_part+'/';
-          if(path_part_formatted != '/'){
-            if(!parent.children[path_part_formatted]){
-              parent.children[path_part_formatted] = {urls:[],path:path_part_formatted,children:{},level:level};
-            }
-            
-            if(path_split.length == level) {
-              depth_obj.children[host].urls.push(fullpath_formatted);
-            }
-            parent = parent.children[path_part_formatted];
-          }
-        });
-      }
-
-     
-
-    }
-
-    console.log(depth_obj);
-
-    //create the html
-
-    //loop through all children, get total counts, needs to go inifinite deep
-    var $appender = $('.appender');
-    _.each(depth_obj.children,function(v,k){ //some kind of serious recurision problem here is killing chrome, they are all nested at all levels?
-      //create a top level holder
-      var host = k;
-      // console.log(host);
-      var $host_parent = $(document.createElement('div'));
-      $host_parent.addClass('parent');
-      $host_parent.attr('data-count',1);
-      $host_parent.attr('data-host',host);
-      $host_parent.append('<p>'+toggle+'<button class="url">'+host+'/</button><a href="https://'+host+'" target="_blank">'+arr+'</a></p>');
-      $host_parent.append($(document.createElement('div')).addClass('children'));
-     
-      var host_count = 1;
-      var path_count = 0;
-
-      $appender.append($host_parent);
-
-      _.each(v.urls, function(url){
-        if(url!='/') {
-          host_count++;
-          var levels_to_make = pretty_path_split(url);
-          var $this_parent;
-          _.each(levels_to_make, function(level, idx){
-            path_count++;
-            var path_id = host+'|'+level+'|'+idx;
-            var parent_identified = false;
-
-            var last_level = idx==levels_to_make.length-1;
-            if(idx == 0) {
-              $this_parent = $host_parent; //always start back at the host/parent, which has to exist
-              parent_found = true;
-            } else {
-              // console.log(level, idx);
-              var parent_idx = idx-1;
-              var parent_path_id =  host+'|'+levels_to_make[parent_idx] +'|'+parent_idx;
-              $this_parent = $($this_parent.find('.children')[0]).find('[data-path-id="'+parent_path_id+'"]');
-
-            }
-            //now we have a path, and a path parent identified.
-            //if there is no parent (how could that be??) i dont think that can happen, but in case lets do an if check
-            if(parent_found || $this_parent.length) {
-              $this_parent = $($this_parent[0]);//turn it back into a jquery object
-              //does this path already exist?
-              var $self = $($this_parent.find('.children')[0]).find('[data-path-id="'+path_id+'"]');
-              
-              if($self.length) {
-                $self = $($self[0]);//turn it bakc into a jquery object
-
-                var $a = $self.children().first().find('a');
-                var $btn = $self.children().first().find('button.toggle');
-                //do i need to do anything at all? 
-                //if it is the last one, might need to add a href and either way increase the counter?
-                $self.attr('data-count',parseInt($self.attr('data-count'))+1);
-                
-                // console.log($a.length,$btn.length, last_level);
-
-                if(last_level){
-                  if(!$a.length){
-                    // console.log('ERROR: node existed but there was no link');
-                    $self.children().first().html('<p>'+toggle+'<button class="url">'+level+'</button><a target="_blank"  tabindex="-1" data-rel-path="'+host+url+'" href="https://'+host+url+'">'+arr+'</a></p>');
-                  }
-                } else {
-                  if(!$btn.length){
-                    // console.log('ERROR: node existed but no button');
-                    $self.children().first().prepend(toggle);
-                  }
-                }
-               
-                
-              } else {
-                //no existing child node at this path level on the current parent, need to create it
-                $self = $(document.createElement('div'));
-                $self.addClass('self');
-                $self.attr('data-count',0);
-                $self.attr('data-path-id',path_id);
-                if(last_level) {
-                  $self.attr('data-count',1);
-                  $self.append('<p><button class="url">'+level+'</button><a target="_blank" tabindex="-1" data-rel-path="'+host+url+'" href="https://'+host+url+'">'+arr+'</a></p>');
-                } else {
-                  $self.append('<p>'+toggle+level+'</p>');
-                }
-                
-                $self.attr('data-host',k);
-                $self.append($(document.createElement('div')).addClass('children'));
-                $($this_parent.find('.children')[0]).append($self);
-              }
-            } else {
-              console.log('ERROR: no parent div found');
-            }
-            
-          });
-        }
-        
-      });
-
-
-      console.log('parent', host, 'had', host_count, path_count);
-
-      
-    });
-
-
-    $('.loading').remove();
-    //sort links alphabetically
-    $('.children').each(function(){
-      var $list = $(this);
-      var items = $(this).children('div');
-      items.sort(function(a, b) {
-        // console.log('sorting?')
-        // console.log($(a).find('div:first-of-type').text(),$(b).find('div:first-of-type'));
-        return $($(a).find('p')[0]).text().toUpperCase().localeCompare($($(b).find('p')[0]).text().toUpperCase());
-      });
-      $.each(items, function(idx, itm) { $list.append(itm); });
-    });
-
-    //count links at each level
-    $('.parent').each(function(){
-      var count =$(this).find('a').length;
-      $(this).children().first().append('<span class="count">('+count+')</span>');
-    });
-    $('.self').each(function(){
-      var count = $(this).find('a').length;
-      if(count > 1) {
-        $(this).children().first().append('<span class="count">('+count+')</span>');
-      }
-      
-    });
-
-    //hook up any listeners
-    $('.toggle').click(function(){
-      if($(this).text() == '+') {
-        $(this).text('-');
-        $(this).parent().next().show();
-      } else {
-        $(this).text('+');
-        $(this).parent().next().hide();
-      }
-      
-    });
-
-    $('button.url').focus(function(){
-      populateUrlInfo($(this).parent());
-    });
-
-  }
-
-  
-  $.get('./sitemap_all.json')
-    .done(function(data){
-      console.log('got json');
-      sitemap_json = data;
-      createLinks();
-    })
-    .fail(function(err) {
-      console.log('error');
-    });
-
-
-  //get some counts, maybe re-order by cound
-  // depth_obj.count = depth_obj.urls.length;
-  // _.forEach(depth_obj.children, function(level) {
-  //   level.count = level.urls.length;
-  //   _.forEach(level.children, function(sub_level){
-  //     sub_level.count = sub_level.urls.length;
-  //   });
-
+  // $('.url').click(function(){
+  //   fillInfoBox($(this).parent().attr('data-url'));
   // });
-  // console.log(depth_obj);
-  // $('.total').text(depth_obj.urls.length);
-  // var $appender = $('.appender');
-  // var root = $('.level_0').attr('href');
-  // $('.level_0')
-  // _.forEach(depth_obj.children, function(level) {
-  //   // console.log(level);
-  //   var $parent = $(document.createElement('div'));
-  //   $parent.attr('data-count',level.count);
-  //   $parent.addClass('parent');
-  //   var spaces = '';
-  //   var count = level.count>1?'('+level.count+')':'';
-  //   for(var i=0;i<level.level;i++){
-  //     spaces+='&nbsp;'
-  //   }
+  $('.url').focus(function(){
+    fillInfoBox($(this).parent().attr('data-url'));
+  });
 
-  //   var has_children = _.keys(level.children).length;
-  //   var toggler = angle;
-  //   if(has_children) {
-  //     toggler = toggle;
-  //   }
+});
 
-  //   if(_.includes(level.urls,'/'+level.path)) { //if the path matches any children, this is a linkable top
-  //     $parent.append('<div>'+spaces+toggler+'<button class="info">'+level.path+'</button>&nbsp;<a href="'+root+level.path+'" target="_blank" class="level_'+level.level+'" tabindex="-1">'+arr+'</a> '+count+'</div>');
-  //   } else { //still create the top but not as a link
-  //     $parent.append('<div class="level_'+level.level+'">'+spaces+toggler+level.path+' '+count+'</div>');
-  //   }
-  //   if(_.keys(level.children).length) { //has children, this only works due to being 2 levels deep max //
-  //     _.forEach(level.children, function(sub_level){
-  //       var $sub_parent = $(document.createElement('div'));
-  //       $sub_parent.attr('data-count',sub_level.count);
-  //       $sub_parent.addClass('sub_parent');
-  //       var spaces = '';
-  //       var count = sub_level.count>1?'('+sub_level.count+')':'';
-  //       for(var i=0;i<sub_level.level;i++){
-  //         spaces+='&nbsp;'
-  //       }
-  //       if(_.includes(sub_level.urls,'/'+level.path+sub_level.path)) { //if the path matches any urls, this is a linkable sub
-  //         $sub_parent.append('<div>'+spaces+angle+'<button class="info">'+sub_level.path+'</button>&nbsp;<a href="'+root+level.path+sub_level.path+'" target="_blank" class="level_'+sub_level.level+'" tabindex="-1">'+arr+'</a> '+count+'</div>');
-  //       } else { //still create the top but not as a link
-  //         $sub_parent.append('<div class="level'+sub_level.level+'">'+spaces+angle+sub_level.path+' '+count+'</div>');
-  //       }
-  //       $parent.append($sub_parent);
-  //     });
-  //   }
-  //   $appender.append($parent);
-  // });
-
-
-
-  // var $list = $('.appender');
-  // console.log($list);
-  
-
-  // var $wrapper = $('.appender');
-  // $wrapper.find('.parent').sort(function(a, b) {
-  //   return +b.dataset.count - +a.dataset.count;
-  // })
-  // .appendTo($wrapper);
-
-  // $('.parent').each(function(){
-  //   var $list = $(this);
-  //   var items = $(this).children('.sub_parent').get();
-  //   items.sort(function(a, b) {
-  //     return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
-  //   });
-  //   $.each(items, function(idx, itm) { $list.append(itm); });
-  // });
-
-  function statusToPretty(status) {
-    if(status == 'N') {
-      return 'nothing/keep';
-    }
-    if(status == 'M') {
-
-      return 'migrate';
-    }
-    if(status == 'F') {
-      return 'forward';
-    }
-    if(status == 'R') {
-      return 'remove';
-    }
-  }
+function getAStat(stat,value) {
+  return `<div class="stat"><strong>${stat}</strong><span>${value}</span></div>`;
+}
   function makeFullUrl(href) {
     if(href.split('')[href.split('').length-1] != '/') {
       href = href+'/';
     }
     return href;
   }
-  function populateUrlInfo($el) {
-    console.log('populating url info');
-    $('.img-holder').show();
-    if($el.find('a').attr('href')) {
+var statusOptions = [{short:'',pretty:'no plan yet'},{short:'N',pretty:'nothing/keep'},{short:'F',pretty:'forward'},{short:'R',pretty:'remove'},{short:'M',pretty:'migrate'}]; //nothing, forward, remove, migrate
 
-      var $img = $(document.createElement('div'));
-      $img.addClass('img-preview');
-      var href = $el.find('a').attr('href');
-
-      var file_path = href.replace('https://','./')+'/';
-      file_path = file_path.replace('//','/');
-
-      console.log(href, file_path);
-
-      $img.append('<p><strong><a target="_blank" href="'+href+'">'+href+'</a></strong></p>');
-
-      $.get(file_path+'stats.json')
-        .done(function(data){
-          var src = file_path+'lighhouse_desktop.jpg';
-          $img.append('<a href="'+href+'" target="_blank"><img src="'+src+'"></a>');
-
-          var $data = $(document.createElement('div'));
-          if(data.title) {
-            $data.append('<p>title: '+data.title+'</p>');
-          }
-          if(data.lighthouse.desktop) {
-            $data.append('<p>crawled: '+new Date(data.time)+'</p>');
-            $data.append('<p>speed: '+data.lighthouse.desktop.page_speed+'</p>');
-            $data.append('<p>a11y: '+data.lighthouse.desktop.a11y+'</p>');
-            $data.append('<p>seo: '+data.lighthouse.desktop.seo+'</p>');
-            $data.append('<p>bp: '+data.lighthouse.desktop.best_practices+'</p>');
-          }
-
-          $img.append($data);
-          $('.img-holder').html($img.html());
-          $.get('https://kill-or-keep.glitch.me/status?url='+makeFullUrl(href))
-            .done(function(data){
-              console.log(data.status);
-              var $status = $(document.createElement('div'));
-              if(data.status) {
-                $status.append('<p>Plan: <strong class="current-status">'+statusToPretty(data.status)+'</strong></p>');
-              } else {
-                $status.append('<p class="no-status-yet"><strong>No Plan Yet</strong></p>');
-              }
-              var statusOptions = [{short:'N',pretty:'nothing/keep'},{short:'F',pretty:'forward'},{short:'R',pretty:'remove'},{short:'M',pretty:'migrate'}]; //nothing, forward, remove, migrate
-              for(var i=0;i<statusOptions.length;i++) {
-                $status.append('<button class="status-toggle" data-status="'+statusOptions[i].short+'" data-url="'+href+'">'+statusOptions[i].pretty+'</button>');
-              }
-              
-              $('.img-holder').append($status);
-
-              $('.status-toggle').click(function(e){
-                e.preventDefault();
-
-                var url = $(this).attr('data-url');
-                var newStatus = $(this).attr('data-status');
-                
-                console.log('clicked', url, newStatus);
-
-                $('.current-status').text('saving');
-                $('.no-status-yet').html('Plan: <strong class="current-status">saving</strong>');
-                $('.status-toggle').each(function(){
-                  $(this).attr('disabled','disabled');
-                });
- 
-                $.get('https://kill-or-keep.glitch.me/update?url='+makeFullUrl(href)+'&status='+newStatus)
-                  .done(function(data){
-                    $('.current-status').text(statusToPretty(data.status));
-                    $('.status-toggle').each(function(){
-                      $(this).attr('disabled',false);
-                    });
-                  });
-              })
-              
-            });
-        })
-        .fail(function(err) {
-          console.log('failed');
-          $img.append('<p><em>in progress</em></p>');
-          $('.img-holder').html($img);
-          console.log('error');
-        });
-
-      
+function getDropdown(selected,url) {
+  var drop_down = `<select value="${selected}" data-url="${url}" class="status-options">`;
+  for(var i=0;i<statusOptions.length;i++) {
+    if(selected==statusOptions[i].short) {
+      drop_down += `<option selected="selected" value="${statusOptions[i].short}">${statusOptions[i].pretty}</option>`;
+    } else {
+      drop_down += `<option value="${statusOptions[i].short}">${statusOptions[i].pretty}</option>`;
     }
   }
-  // $('button.info').click(function(){
-  //   populateUrlInfo($(this).parent());
-  // })
+  drop_down += `<select>`;
+  return drop_down;
+}
+function fillInfoBox(url) {
+  $('.plan').html('fetching current plan...');
+  $('.data-box').show();
+  loading('fetching current plan for '+url);
+  window.setTimeout(function(){loading('ready')},2000);
+  $.get('https://kill-or-keep.glitch.me/status?url='+makeFullUrl(url))
+    .done(function(data){
+      var dropdown = getDropdown(data.status,url);
+      $('.plan').html(dropdown);
+      
+      $('.status-options').change(function(){
+        var newStatus = $(this).val();
+        var url = $(this).attr('data-url');
+        loading('changing plan for '+url);
+        $.get('https://kill-or-keep.glitch.me/update?url='+makeFullUrl(url)+'&status='+newStatus)
+          .done(function(data){
+            console.log(data);
+            loading('plan for '+url+' changed');
+            window.setTimeout(function(){loading('ready')},2000);
+          });
+      });
+      
+    });
+  var row = tree_data.sheet_data_obj[url];
+  var stats = '';
+  stats+=getAStat('status', row.status);
+  stats+=getAStat('speed', row.lh_desktop_perf);
+  stats+=getAStat('seo', row.lh_mobile_seo);
+
+  stats+=getAStat('visits (1 year)', row.hits_1_year);
+  
+  $('.stats-box').html(stats);
+  $('.title').html(`<a href="${url} target="_blank">${url}</a>`);
+  $('#preview').attr('src',url);
+}
 
 
+
+function processDomainLinks() {
+  loading('creating link tree');
+
+  for(var i=0;i<window.treemaker.domains.length;i++){
+    var root = window.treemaker.domains[i].root;
+    console.log(root);
+    tree_data.tree[root] = {title:root,children:{}};
+    var list = tree_data.sheet_data[root];
+
+    for(var j=0;j<list.length;j++){
+      var row = list[j];
+      var url = row.url;
+
+      if(url.indexOf(root) > -1 && row.status == 200) {
+        var parts = url.split(root)[1].split('/');
+        var branch = tree_data.tree[root].children;
+        var real_parts = []
+        for(q=0;q<parts.length;q++) {
+          if(parts[q]!=''){
+            real_parts.push(parts[q]);
+          }
+        }
+        parts = real_parts;
+        for(var k=0;k<parts.length;k++){
+          var part = parts[k];
+          var is_last = k == parts.length-1;
+          if(part != '') {
+            if(branch[part]) {
+              //this leaf exists
+            } else {
+              //create the leaf
+              var current_path = url.split(root)[1].split(part)[0]+part;
+
+              branch[part] = {title:part,children:{},current_path:current_path,depth:k+1,root:root};
+            }
+            if(is_last) {
+
+              branch[part].url = url;
+            }
+            branch = branch[part].children; //latch onto next level
+          }
+        }
+      }
+    }
+  }
+  createDomainChildren();
+}
+
+function createChildBucket($root, node_with_children) {
+  var node_keys = Object.keys(node_with_children);
+
+  for(var j=0;j<node_keys.length;j++) {
+
+      var part = node_keys[j];
+      var part_obj = node_with_children[part];
+
+      var has_link = part_obj.url;
+      var has_children = Object.keys(part_obj.children).length > 0;
+      var link = '';
+      var children ='';
+      var toggle = '';
+
+      if(has_link) {
+        link =getLinkHTML(part_obj.url,part);
+        // link = `<a href="${part_obj.url}" target="_blank">${part}</a>`;
+      } else {
+        link = part;
+        part_obj.link='';
+      }
+      if(has_children) {
+
+        toggle = `${c.toggle}`;
+        children = `<div class="bucket-list" style="display:none" data-bucket="${part_obj.root}${part_obj.current_path}"></div>`;
+      }
+      var tabs = '';
+      for(var k=0;k<part_obj.depth;k++){
+        if(k==part_obj.depth-1){
+          tabs += c.angle;
+        } else {
+          tabs += c.space;
+        }
+      }
+      var bucket_html = `<div class="bucket-title no-plan" data-bucket="${part_obj.root}${part_obj.current_path}" data-url="${part_obj.url}">${tabs}${toggle}${link}</div>${children}`;
+
+      $root.append(bucket_html);
+      if(has_children) {
+        var $children_node = $('.bucket-list[data-bucket="'+part_obj.root+part_obj.current_path+'"');
+        createChildBucket($children_node, part_obj.children);
+      }
+    }
+}
+
+function createDomainChildren() {
+  for(var i=0;i<window.treemaker.domains.length;i++){
+    var root = window.treemaker.domains[i].root;
+    //level 1:
+    var $root = $('.bucket-list[data-bucket="'+root+'"');
+
+    var node = tree_data.tree[root].children;
+    
+    createChildBucket($root, node);
+
+  }
+  loading('ready');
+  $('.bucket-list').each(function(){
+    var count = $(this).find('a').length;
+    $(this).prev().append('('+count+')');
+  });
+}
+function getLinkHTML(url,text) {
+  return `<span class="bullet-status">&#9679;</span>&nbsp;<button class="url">${text}</button> <a href="${url}" target="_blank" tabindex="-1">${c.arr}</a>`;
+}
+function createDomainTree(domain){
+  var link = getLinkHTML(domain,domain);
+  var domainRoot = `<div class="root"><div class="bucket-title no-plan" data-bucket="${domain}" data-url="${domain}">${c.toggle} ${link}</div><div  style="display:none" class="bucket-list" data-bucket="${domain}"></div></div>`;
+  $('.tree').append(domainRoot);
+}
+
+function flattenData(arr) {
+  for(var i=0;i<arr.length;i++){
+    tree_data.sheet_data_obj[arr[i].url] = arr[i];
+  }
+}
+
+function getLinkList(domain,data_source,key) {
+  //data source not used yet
+  return new Promise ((resolve, reject) => {
+    $.get('https://gson.glitch.me/',{domain:domain,sheet:key}, function(data) {
+      if(data.length) {
+        tree_data.sheet_data[domain] = data;
+        resolve(data);
+        flattenData(data);
+      } else {
+        reject();
+      }
+    });
+  });
   
 
-  
-</script>
+}</script>
+
 </body>
 </html>
