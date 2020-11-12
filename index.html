@@ -9,6 +9,9 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
+.ul {
+  text-decoration: underline; }
+
 .data-box {
   max-width: 600px;
   width: 600px;
@@ -87,11 +90,62 @@
       margin-bottom: 5px; }
 
 .loading {
-  font-style: italic;
+  font-style: italic; }
+
+.page-status {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-bottom: 10px; }
 
+.bullet-statuss {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .bullet-statuss > div {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-right: 15px; }
+
 .bullet-status {
-  display: none; }
+  opacity: .05; }
+  .forward .bullet-status {
+    opacity: .8;
+    color: green; }
+  .nothing .bullet-status {
+    opacity: .25;
+    color: black; }
+  .no-plan .bullet-status {
+    opacity: .8;
+    color: black; }
+  .remove .bullet-status {
+    opacity: .8;
+    color: red; }
+  .migrate .bullet-status {
+    opacity: .8;
+    color: purple; }
 
 h1 {
   margin-bottom: 10px;
@@ -251,9 +305,19 @@ button:not(.status-toggle) {
 
 <div class="img-holder" style="display:none"></div>
 <h1>Neon One Properties</h1>
-<div class="loading">loading...</div>
+<div class="page-status">page status:&nbsp;<div class="loading">loading...</div></div>
 <div class="helper">worksheet: <a href="https://docs.google.com/spreadsheets/d/1ZiwEAAqVtHiuBUvEZ9WerK2WATXt4iVcMyS1AigGVKw/edit#gid=0" target="_blank">https://docs.google.com/spreadsheets/d/1ZiwEAAqVtHiuBUvEZ9WerK2WATXt4iVcMyS1AigGVKw/edit#gid=0</a></div>
 <hr>
+<em>Plan Color Legend:</em>
+<div class="bullet-statuss">
+  <div class="no-plan"><span class="bullet-status">&#9679;</span>&nbsp;No Plan Yet</div>
+  <div class="nothing"><span class="bullet-status">&#9679;</span>&nbsp;Do Nothing / Keep</div>
+  <div class="forward"><span class="bullet-status">&#9679;</span>&nbsp;Forward</div>
+  <div class="remove"><span class="bullet-status">&#9679;</span>&nbsp;Remove</div>
+  <div class="migrate"><span class="bullet-status">&#9679;</span>&nbsp;Migrate Content</div>
+</div>
+<br>
+<button class="ul js-expand-all">expand all</button><br><br>
 <div class="appender tree">
 
 </div>
@@ -274,7 +338,7 @@ button:not(.status-toggle) {
 <script>var c = {};
 c.angle = '&nbsp;└&nbsp;';
 c.arr = '↗';
-c.toggle = '<button class="toggle"></button>&nbsp;';
+c.toggle = '<button class="toggle"></button>';
 c.space = '&nbsp;';
 
 
@@ -311,6 +375,25 @@ $(document).ready(async function(){
   });
 
   getStatusSheet();
+
+  $('.js-expand-all').click(function(){
+    if($(this).hasClass('expanded')) {
+      $(this).removeClass('expanded');
+      $(this).text('expand all');
+      $('.bucket-list').each(function(){
+        $(this).hide();
+      });
+      $('.toggle').each(function(){$(this).removeClass('open')});
+    } else {
+      $(this).addClass('expanded');
+      $(this).text('collapse all');
+      $('.bucket-list').each(function(){
+        $(this).show();
+      });
+      $('.toggle').each(function(){$(this).addClass('open')});
+    } 
+
+  });
 
 });
 
@@ -356,13 +439,47 @@ function getStatusSheet(){
           }
           
         }
-
         tree_data.status_data[rowObj.url] = rowObj.plan;
       }
       loading('ready');
+      applyStatusColors();
   });
 }
+function applyStatusColor($el, status) {
+  var classMod = 'no-plan';
+  $el.removeClass('no-plan');
+  $el.removeClass('nothing');
+  $el.removeClass('forward');
+  $el.removeClass('remove');
+  $el.removeClass('migrate');
+  
+  if(status == 'N') { //NFRM
+    classMod = 'nothing';
+    
+  } else if(status == 'F') {
+    classMod = 'forward';
+    
+  } else if(status == 'R') {
+    classMod = 'remove';
+    
+  } else if(status == 'M') {
+    classMod = 'migrate';
+    
+  }
 
+  $el.addClass(classMod);
+}
+function applyStatusColors() {
+  var urls = Object.keys(tree_data.status_data);
+  for(var i=0;i<urls.length;i++) {
+    var link = urls[i];
+    var status = tree_data.status_data[link];
+    
+    var $bucket = $('.bucket-title[data-url="'+link+'"]');
+    applyStatusColor($bucket, status);
+    
+  }
+}
 function get_url_status(url) {
   return tree_data.status_data[url];
 }
@@ -379,6 +496,8 @@ function fillInfoBox(url) {
     var newStatus = $(this).val();
     var url = $(this).attr('data-url');
     loading('changing plan for '+url);
+    var $bucket = $('.bucket-title[data-url="'+url+'"]');
+    applyStatusColor($bucket,newStatus);
 
     $.get('https://kill-or-keep.glitch.me/update?url='+makeFullUrl(url)+'&status='+newStatus)
       .done(function(data){
@@ -461,19 +580,18 @@ function createChildBucket($root, node_with_children) {
 
       var has_link = part_obj.url;
       var has_children = Object.keys(part_obj.children).length > 0;
-      var link = '';
+      var link = '&nbsp;';
       var children ='';
-      var toggle = '';
+      var toggle = ' ';
 
       if(has_link) {
         link =getLinkHTML(part_obj.url,part);
         // link = `<a href="${part_obj.url}" target="_blank">${part}</a>`;
       } else {
-        link = part;
+        link = '&nbsp;'+part;
         part_obj.link='';
       }
       if(has_children) {
-
         toggle = `${c.toggle}`;
         children = `<div class="bucket-list" style="display:none" data-bucket="${part_obj.root}${part_obj.current_path}"></div>`;
       }
@@ -513,11 +631,11 @@ function createDomainChildren() {
   });
 }
 function getLinkHTML(url,text) {
-  return `<span class="bullet-status">&#9679;</span>&nbsp;<button class="url">${text}</button> <a href="${url}" target="_blank" tabindex="-1">${c.arr}</a>`;
+  return `&nbsp;<button class="url">${text}</button> <span class="bullet-status">&#9679;</span> <a href="${url}" target="_blank" tabindex="-1">${c.arr}</a>`;
 }
 function createDomainTree(domain){
   var link = getLinkHTML(domain,domain);
-  var domainRoot = `<div class="root"><div class="bucket-title no-plan" data-bucket="${domain}" data-url="${domain}">${c.toggle} ${link}</div><div  style="display:none" class="bucket-list" data-bucket="${domain}"></div></div>`;
+  var domainRoot = `<div class="root"><div class="bucket-title" data-bucket="${domain}" data-url="${domain}">${c.toggle} ${link}</div><div  style="display:none" class="bucket-list" data-bucket="${domain}"></div></div>`;
   $('.tree').append(domainRoot);
 }
 
@@ -550,6 +668,7 @@ function getLinkList(domain,data_source,key) {
         rows.push(rowObj);
       }
       if(rows.length) {
+        rows = _.orderBy(rows, ['url'], ['asc']);
         tree_data.sheet_data[domain] = rows;
         resolve(rows);
         flattenData(rows);
